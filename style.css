@@ -1,0 +1,26 @@
+@font-face{
+        font-family: rotondac;
+        src: url('fonts/rotondac.otf') format("opentype");
+        font-weight:400;
+        font-weight:normal;
+      }
+
+@font-face{
+        font-family: rotondac_bold;
+        src: url('fonts/rotondac-bold.otf') format("opentype");
+        font-weight:400;
+        font-weight:normal;
+      }      
+
+#centered{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -384px;
+    margin-left: -512px;
+    width: 1024px;
+    height: 768px;
+    background-color: white;
+    font-family: 'rotondac', Fallback, sans-serif;
+}
+
