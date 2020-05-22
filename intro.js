@@ -140,7 +140,7 @@ dialog.answers = [];
 dialog.question = 'Наконец, ты видишь впереди маму, бегущую навстречу. Она, конечно же, сразу обнаружила, что уехала без тебя, вышла на ближайшей остановке и вернулась назад.';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Ура',
+    text: 'Ура!',
     type: 'win'
 });
 novel.dialogs.push(dialog);

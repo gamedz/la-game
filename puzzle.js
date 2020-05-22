@@ -123,7 +123,7 @@ var ScenePuzzle = new Phaser.Class({
         pieces.forEach(function(piece, i) {               
                 if ( piece.placed == false )
                 {
-                    // isVictory = false;
+                     isVictory = false;
                 }
             }, this);
             if ( isVictory )

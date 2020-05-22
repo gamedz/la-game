@@ -223,18 +223,18 @@ var SceneMap = new Phaser.Class({
                 });
             }, this);
 
-        debugStr = 'Дебаг: isRaising=' + this.isRaising
-            + '\n beforePuzzle=' + beforePuzzle 
-            + '\n beforeStranger=' + beforeStranger
-            + '\n afterPuzzle=' + afterPuzzle 
-            + '\n afterStranger=' + afterStranger      
-            + '\n progress=' + progress;
+        // debugStr = 'Дебаг: isRaising=' + this.isRaising
+        //     + '\n beforePuzzle=' + beforePuzzle 
+        //     + '\n beforeStranger=' + beforeStranger
+        //     + '\n afterPuzzle=' + afterPuzzle 
+        //     + '\n afterStranger=' + afterStranger      
+        //     + '\n progress=' + progress;
               
 
-        this.add.text(700, 20, debugStr, {
-            color: 'white',
-            fontSize: '10px'
-        });
+        // this.add.text(700, 20, debugStr, {
+        //     color: 'white',
+        //     fontSize: '10px'
+        // });
 
         this.add.text(900, 20, 'Чит: пройти', {
                 color: 'white',
@@ -248,23 +248,23 @@ var SceneMap = new Phaser.Class({
                 });
             }, this);
 
-        this.add.text(900, 35, 'Чит: лес', {
-                color: 'white',
-                fontSize: '10px'
-            })
-            .setInteractive()
-            .on('pointerdown', function() {
-                this.scene.start('scenePack');
-            }, this);
+        // this.add.text(900, 35, 'Чит: лес', {
+        //         color: 'white',
+        //         fontSize: '10px'
+        //     })
+        //     .setInteractive()
+        //     .on('pointerdown', function() {
+        //         this.scene.start('scenePack');
+        //     }, this);
 
-        this.add.text(900, 50, 'Чит: паззл', {
-                color: 'white',
-                fontSize: '10px'
-            })
-            .setInteractive()
-            .on('pointerdown', function() {
-                this.scene.start('scenePuzzle');
-            }, this);
+        // this.add.text(900, 50, 'Чит: паззл', {
+        //         color: 'white',
+        //         fontSize: '10px'
+        //     })
+        //     .setInteractive()
+        //     .on('pointerdown', function() {
+        //         this.scene.start('scenePuzzle');
+        //     }, this);
 
     },
     update: function() {
