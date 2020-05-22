@@ -92,7 +92,7 @@ var SceneMap = new Phaser.Class({
 
         graphics = this.add.graphics();
 
-        var txtHello = this.add.text(this.cameras.main.centerX, 20, 'Привет, ' + playerName + '!', {
+        var txtHello = this.add.text(this.cameras.main.centerX, 20, playerName == '' ? 'Привет!' : 'Привет, ' + playerName + '!', {
             fontFamily: "rotondac",
             color: 'white',
             fontSize: '25px',
@@ -195,13 +195,13 @@ var SceneMap = new Phaser.Class({
 
 
 
-            var txtTitle = this.add.text(locationPositions[i][0], locationPositions[i][1] + 70, locationTitles[i], {
-                fontFamily: "rotondac_bold",
-                color: 'white',
-                fontSize: '20px'
-            });
-            txtTitle.setOrigin(0.5);
-            txtTitle.setStroke('black', 2);
+            // var txtTitle = this.add.text(locationPositions[i][0], locationPositions[i][1] + 70, locationTitles[i], {
+            //     fontFamily: "rotondac_bold",
+            //     color: 'white',
+            //     fontSize: '20px'
+            // });
+            // txtTitle.setOrigin(0.5);
+            // txtTitle.setStroke('black', 2);
 
         }, this);
 
