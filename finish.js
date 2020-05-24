@@ -17,11 +17,18 @@ var SceneFinish = new Phaser.Class({
 
     preload: function() {
         this.load.image('diplom', 'assets/diplom.png');
-
     },
 
     create: function() {
         console.log(previousNovelType);
         this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'diplom');
+
+        txtName = this.add.text(this.cameras.main.centerX, 390, playerName, {
+            fontFamily: "rotondac",
+            color: '#9B5649',
+            fontSize: '50px',
+            alpha: 1
+        });
+        txtName.setOrigin(0.5);
     }
 });

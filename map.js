@@ -241,7 +241,18 @@ var SceneMap = new Phaser.Class({
             })
             .setInteractive()
             .on('pointerdown', function() {
-                progress++;
+
+                if ( progress == 2 && passedPuzzlesNumber == 0 )
+                    passedPuzzlesNumber++;
+                else if ( progress ==3 && passedStrangersNumber == 0 )
+                    passedStrangersNumber++;
+                else if ( progress ==4 && passedStrangersNumber == 1 )
+                    passedStrangersNumber++;
+                else if ( progress ==5 && passedStrangersNumber == 2 )
+                    passedStrangersNumber++;
+                else                    
+                    progress++;
+                
                 this.scene.start('sceneMap', {
                     isRaising: true
                 });

@@ -151,6 +151,18 @@ var ScenePuzzle = new Phaser.Class({
             }
      
         }, this);
+
+         this.add.text(900, 20, 'Чит: пройти', {
+                color: 'white',
+                fontSize: '10px'
+            })
+            .setInteractive()
+            .on('pointerdown', function() {
+                pieces.forEach(function(piece, i) {
+                    piece.placed = true;
+                }, this);
+                this.checkVictory();                
+            }, this);
     },
     checkVictory: function()
     {
@@ -182,10 +194,20 @@ var ScenePuzzle = new Phaser.Class({
             duration: 2000,
             ease: 'Quad.easeInOut',
             onComplete: function() {
-                currentScene.appearNextBtn();
+                currentScene.completedPuzzleScalingCompleted();
             }
         });
-
+    },
+    completedPuzzleScalingCompleted: function()
+    {
+        if ( passedPuzzlesNumber == 0 )
+        {
+            currentScene.appearNextBtn();
+        }
+        else
+        {
+            this.scene.start('sceneFinish');
+        }
     },
     appearNextBtn: function()
     {
