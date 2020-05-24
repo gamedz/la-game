@@ -249,7 +249,7 @@ const SceneMap = new Phaser.Class({
     },
     letBirdFly: function(bird) {
         bird.progress = 0;
-        bird.path = new Phaser.Curves.Path(Math.random() > 0.5 ? -200 : 1224, Math.random() * 768);
+        bird.path = new Phaser.Curves.Path((Math.random() > 0.5 ? -200 : 1224), Math.random() * 768);
         bird.points = [];
         for (let i = 0; i < Math.random() * 4 + 7; ++i) {
             bird.points.push(Math.random() * 1024, Math.random() * 768);

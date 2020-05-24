@@ -18,17 +18,16 @@ const SceneWin = new Phaser.Class({
     },
 
     create: function() {
-        winBack = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winBack');
-        winBack.setInteractive()
-            .on('pointerdown', function() {
-                if (previousNovelType == 'simple') {
+                        if (previousNovelType == 'simple') {
                     progress++;
                 } else if (previousNovelType == 'stranger') {
                     passedStrangersNumber++;
                 } else if (previousNovelType == 'puzzle') {
                     passedPuzzlesNumber++;
                 }
-
+        winBack = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winBack');
+        winBack.setInteractive()
+            .on('pointerdown', function() {
                 if (progress == 7) {
                     this.scene.start('sceneFinish');
                 } else {
