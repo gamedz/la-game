@@ -21,7 +21,6 @@ const SceneWin = new Phaser.Class({
         winBack = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winBack');
         winBack.setInteractive()
             .on('pointerdown', function() {
-                console.log(previousNovelType);
                 if ( previousNovelType == 'simple' )
                 {
                     progress++;

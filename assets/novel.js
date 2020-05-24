@@ -13,7 +13,6 @@ const SceneNovel = new Phaser.Class({
 
     init: function(data) {
         previousNovelType = data.type;
-        console.log(previousNovelType);
 
         if (data.type == 'simple') {
             novel = novels[progress];
@@ -42,11 +41,15 @@ const SceneNovel = new Phaser.Class({
 
         this.load.image('Title', 'assets/novel/Title.png');
         if ( dialog.type == 'character' )
-            this.load.image('Character' + dialog.characterImg, 'assets/novel/' + dialog.characterImg + '.png' );
+            this.load.image('Character' + dialog.characterImg, 'assets/novel/characters/' + dialog.characterImg + '.png' );
 
-        answers.forEach(function(answer, i) {
-            this.load.image('portrait' + i, 'assets/novel/' + answer.img + '.png');
+        if ( dialog.type == 'squares')
+        {
+            answers.forEach(function(answer, i) {
+            this.load.image('portrait' + i, 'assets/novel/characters/' + answer.img + '.png');
         }, this);
+        }
+        
     },
 
     create: function() {
@@ -74,6 +77,7 @@ const SceneNovel = new Phaser.Class({
             txtQuestion.setX(320);
             txtQuestion.setAlign('left');
             txtQuestion.setOrigin(0, 0.5);
+            txtQuestion.setWordWrapWidth(640);
 
             imgCharacter = this.add.image(190, 170, 'Character' + dialog.characterImg );
         }
@@ -96,15 +100,15 @@ const SceneNovel = new Phaser.Class({
             answer.text = answer.text.replace('%name%', playerName);
 
             if (dialog.type == 'squares') {
-                answer.posX = this.cameras.main.centerX + 200 * answer.side;
-                answer.posY = Math.floor(i / 2) * 300 + 300;
+                answer.posX = this.cameras.main.centerX + 300 * (i%3 - 1);
+                answer.posY = Math.floor(i / 3) * 287 + 300;
 
                 answer.back = this.add.image(-1000, answer.posY, 'Square');
 
                 answer.backChosen = this.add.image(-1000, answer.posY, 'SquareChosen')
                     .setVisible(false);
 
-                answer.txtAnswer = this.add.text(-1000, answer.posY + 100, answer.text, {
+                answer.txtAnswer = this.add.text(-1000, answer.posY + 100, '', {
                         fontFamily: "rotondac",
                         color: 'black',
                         fontSize: '25px'
@@ -198,8 +202,11 @@ const SceneNovel = new Phaser.Class({
         }, this);
 
         currentScene = this;
+        headerParts = [imgTitle, txtQuestion];
+        if ( dialog.type == 'character' )
+            headerParts.push(imgCharacter);
         this.tweens.add({
-            targets: [imgTitle, txtQuestion],
+            targets: headerParts,
             alpha: {
                 from: 1,
                 to: 0

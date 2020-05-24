@@ -26,9 +26,16 @@ const SceneMap = new Phaser.Class({
         this.load.image('LittleCircleEmpty', 'assets/LittleCircleEmpty.png');
         this.load.image('BigCircle', 'assets/BigCircle.png');
         this.load.image('BigCircleEmpty', 'assets/BigCircleEmpty.png');
-        this.load.image('stranger', 'assets/stranger.png');
+
+        for ( let i = 1; i <= 3; i++ )
+            this.load.image('stranger' + i, 'assets/novel/characters/stranger' + i + '.png');
         this.load.image('btnStartLocation', 'assets/btnStartLocation.png');
         this.load.image('puzzle', 'assets/puzzle.png');
+
+        this.load.spritesheet('bird', 'assets/bird.png', {
+            frameWidth: 80,
+            frameHeight: 80
+        });
 
         locationTitles = ['Старт', 'ТЦ', 'Остановка', 'Автобус', 'Лес', 'Школа', 'Дом', 'Финиш'];
         locationPositions = [
@@ -39,7 +46,7 @@ const SceneMap = new Phaser.Class({
             [961, 98],
             [487, 359],
             [681, 719],
-            [963, 648]
+            [890, 699]
         ];
         pathPoints = [
             [158, 179],
@@ -48,9 +55,9 @@ const SceneMap = new Phaser.Class({
             [691, 157, 827, 85],
             [904, 229, 711, 280, 584, 389],
             [486, 405, 541, 496, 475, 667],
-            [831, 717, 900, 695, 942, 650]
-        ];     
-        pointsNumbers = [ 7, 8, 20, 17, 19, 18, 9 ];
+            [831, 717, 860, 718]
+        ];
+        pointsNumbers = [7, 8, 20, 17, 19, 18, 9];
     },
 
     create: function() {
@@ -92,17 +99,15 @@ const SceneMap = new Phaser.Class({
         allPathPointImgs = [];
 
         graphics = this.add.graphics();
-        
+
 
         follower = {
-            moveProgress: moveFromMiddle ? 0.5 : 0,
-            maxMoveProgress: moveOnlyToMiddle ? 0.5 : 1,
+            moveProgress: moveFromMiddle ? 0.4 : 0,
+            maxMoveProgress: moveOnlyToMiddle ? 0.4 : 1,
             movingTime: 0,
             linearTime: 0,
             pos: new Phaser.Math.Vector2()
         };
-
-        console.log(follower.maxMoveProgress);
 
         duration = 0;
         if (this.isRaising)
@@ -110,7 +115,7 @@ const SceneMap = new Phaser.Class({
         if (moveOnlyToMiddle || moveFromMiddle)
             duration *= 0.75;
 
-        this.tweens.add({
+        mainTween = this.tweens.add({
             targets: follower,
             moveProgress: follower.maxMoveProgress,
             ease: 'Sine.easeInOut',
@@ -144,14 +149,14 @@ const SceneMap = new Phaser.Class({
                 paths.push(path);
 
                 pathPointImgs = [];
-                for (let j = 0; j < pointsNumbers[i-1]; j++) {
+                for (let j = 0; j < pointsNumbers[i - 1]; j++) {
                     pos = new Phaser.Math.Vector2();
-                    path.getPoint((1 / pointsNumbers[i-1]) * j, pos);
+                    path.getPoint((1 / pointsNumbers[i - 1]) * j, pos);
 
                     imgName = (j == 0) ? 'BigCircle' : 'LittleCircle';
-                    if ( progress < i )
+                    if (progress < i)
                         imgName += 'Empty';
-                    imgPathPoint = this.add.image(pos.x, pos.y, imgName );
+                    imgPathPoint = this.add.image(pos.x, pos.y, imgName);
                     pathPointImgs.push(imgPathPoint);
                 }
                 allPathPointImgs.push(pathPointImgs);
@@ -163,7 +168,7 @@ const SceneMap = new Phaser.Class({
         locationTitles.forEach(function(locationTitle, i) {
             if (progress >= i) {
                 check = this.add.image(locationPositions[i][0], locationPositions[i][1], 'check');
-                if (progress == i && !afterStranger && !afterPuzzle ) {
+                if (progress == i && !afterStranger && !afterPuzzle) {
                     this.tweens.add({
                         targets: check,
                         scale: {
@@ -183,19 +188,6 @@ const SceneMap = new Phaser.Class({
         hero = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'hero');
         hero.setOrigin(0, 1);
 
-        // debugStr = 'Дебаг: isRaising=' + this.isRaising
-        //     + '\n beforePuzzle=' + beforePuzzle 
-        //     + '\n beforeStranger=' + beforeStranger
-        //     + '\n afterPuzzle=' + afterPuzzle 
-        //     + '\n afterStranger=' + afterStranger      
-        //     + '\n progress=' + progress;
-              
-
-        // this.add.text(700, 20, debugStr, {
-        //     color: 'white',
-        //     fontSize: '10px'
-        // });
-
         this.add.text(900, 20, 'Чит: пройти', {
                 color: 'white',
                 fontSize: '10px'
@@ -203,40 +195,75 @@ const SceneMap = new Phaser.Class({
             .setInteractive()
             .on('pointerdown', function() {
 
-                if ( progress == 2 && passedPuzzlesNumber == 0 )
-                    passedPuzzlesNumber++;
-                else if ( progress ==3 && passedStrangersNumber == 0 )
-                    passedStrangersNumber++;
-                else if ( progress ==4 && passedStrangersNumber == 1 )
-                    passedStrangersNumber++;
-                else if ( progress ==5 && passedStrangersNumber == 2 )
-                    passedStrangersNumber++;
-                else                    
-                    progress++;
+                if (follower.moveProgress < follower.maxMoveProgress) {
+                    mainTween.stop();
+                    follower.moveProgress = follower.maxMoveProgress;
+                    currentScene.afterMoveComplete();
+                } else {
+                    if (progress == 2 && passedPuzzlesNumber == 0)
+                        passedPuzzlesNumber++;
+                    else if (progress == 3 && passedStrangersNumber == 0)
+                        passedStrangersNumber++;
+                    else if (progress == 4 && passedStrangersNumber == 1)
+                        passedStrangersNumber++;
+                    else if (progress == 5 && passedStrangersNumber == 2)
+                        passedStrangersNumber++;
+                    else
+                        progress++;
 
-                this.scene.start('sceneMap', {
-                    isRaising: true
-                });
+                    this.scene.start('sceneMap', {
+                        isRaising: true
+                    });
+                }
+
+
             }, this);
 
-        // this.add.text(900, 35, 'Чит: лес', {
-        //         color: 'white',
-        //         fontSize: '10px'
-        //     })
-        //     .setInteractive()
-        //     .on('pointerdown', function() {
-        //         this.scene.start('scenePack');
-        //     }, this);
+        bird = this.add.sprite(0, this.cameras.main.centerY, 'bird');
 
-        // this.add.text(900, 50, 'Чит: паззл', {
-        //         color: 'white',
-        //         fontSize: '10px'
-        //     })
-        //     .setInteractive()
-        //     .on('pointerdown', function() {
-        //         this.scene.start('scenePuzzle');
-        //     }, this);
+        this.anims.create({
+            key: 'default',
+            frames: this.anims.generateFrameNumbers('bird', {
+                start: 0,
+                end: 3
+            }),
+            frameRate: 10,
+            repeat: -1
+        });
+        bird.anims.play('default');
+        bird.progress = 0;
+        bird.pos = new Phaser.Math.Vector2();
+        bird.tangent = new Phaser.Math.Vector2();
+        currentScene.letBirdFly(bird);
 
+        if ( passedPuzzlesNumber >= 1 )
+            this.add.image(316,318, 'puzzle');
+        if ( passedStrangersNumber >= 1 )
+            this.add.image(734,151, 'stranger1').setOrigin(0.5,1).setScale(0.65);;   
+        if ( passedStrangersNumber >= 2 )
+            this.add.image(761,262, 'stranger2').setOrigin(0.5,1).setScale(0.65);;    
+        if ( passedStrangersNumber >= 3 )
+            this.add.image(500,580, 'stranger3').setOrigin(0.5,1).setScale(0.65);;            
+
+    },
+    letBirdFly: function(bird) {
+        bird.path = new Phaser.Curves.Path(Math.random() > 0.5 ? -200 : 1224, Math.random() * 768);
+        bird.points = [];
+        for (let i = 0; i < Math.random() * 4 + 7; ++i) {
+            bird.points.push(Math.random() * 1024, Math.random() * 768);
+        }
+        bird.points.push(Math.random() > 0.5 ? -200 : 1224, Math.random() * 768);
+        bird.path.splineTo(bird.points);
+        this.tweens.add({
+            targets: bird,
+            progress: 1,
+            ease: 'linear',
+            duration: bird.path.getLength() * 10,
+            yoyo: false,
+            onComplete: function() {
+                currentScene.letBirdFly(bird);
+            }
+        });
     },
     update: function() {
 
@@ -256,55 +283,57 @@ const SceneMap = new Phaser.Class({
         } else {
             hero.angle = 0;
         }
+
+        bird.path.getPoint(bird.progress, bird.pos);
+        bird.path.getTangent(bird.progress, bird.tangent);
+
+        bird.setPosition(bird.pos.x, bird.pos.y);
+        bird.flipX = bird.tangent.x < 0;
+
     },
     afterMoveComplete: function() {
         currentScene = this;
-        btnStartLocation = this.add.image(follower.pos.x, follower.pos.y + 50, 'btnStartLocation');
+        btnStartLocation = this.add.image( Math.min(follower.pos.x, 928), Math.min( follower.pos.y + 50, 720), 'btnStartLocation');
         btnStartLocation.setScale(0);
         btnStartLocation.setOrigin(0.5);
         btnStartLocation.setInteractive()
-        .on('pointerdown', function() {
-                currentScene.btnStartLocationClicked();                
+            .on('pointerdown', function() {
+                currentScene.btnStartLocationClicked();
             }, this);
 
         this.tweens.add({
-                targets: btnStartLocation,
-                scale: {
-                    from: 0,
-                    to: 1
-                },
-                ease: 'Quad.easeOutBack',
-                duration: 250,
-                yoyo: false
-            });
+            targets: btnStartLocation,
+            scale: {
+                from: 0,
+                to: 1
+            },
+            ease: 'Quad.easeOutBack',
+            duration: 250,
+            yoyo: false
+        });
 
-
-        if (!moveOnlyToMiddle)
-            return;
-
-        if (progress == 3 || progress == 4 || progress == 5) {
-            stranger = this.add.image(follower.pos.x + 60, follower.pos.y + 50, 'stranger')
+        if (beforeStranger ) {
+            stranger = this.add.image(follower.pos.x - 70, follower.pos.y + 40, 'stranger' + (passedStrangersNumber + 1))
                 .setOrigin(0.5, 1);
 
             stranger.scaleY = 0;
+            stranger.scaleX = 0.65;
             this.tweens.add({
                 targets: stranger,
                 scaleY: {
                     from: 0,
-                    to: 1
+                    to: 0.65
                 },
                 ease: 'Quad.easeOutBack',
                 duration: 500,
                 yoyo: false
             });
-        }
-        else if ( beforePuzzle )
-        {
+        } 
+
+        if (beforePuzzle || progress == 6 ) {
             puzzle = this.add.image(follower.pos.x + 80, follower.pos.y, 'puzzle')
                 .setOrigin(0.5, 0.5)
                 .setScale(0);
-
-            this.children.bringToTop(hero);
 
             this.tweens.add({
                 targets: puzzle,
@@ -317,18 +346,18 @@ const SceneMap = new Phaser.Class({
                 yoyo: false
             });
         }
+
+        this.children.bringToTop(bird);
     },
-    btnStartLocationClicked: function()
-    {
+    btnStartLocationClicked: function() {
         type = 'simple';
-                if (beforeStranger)
-                    type = 'stranger';
-                if (beforePuzzle)
-                    type = 'puzzle';
-                console.log(type);
-                this.scene.start('sceneNovel', {
-                    dialogIndex: 0,
-                    type: type
-                });
+        if (beforeStranger)
+            type = 'stranger';
+        if (beforePuzzle)
+            type = 'puzzle';
+        this.scene.start('sceneNovel', {
+            dialogIndex: 0,
+            type: type
+        });
     }
 });

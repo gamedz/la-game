@@ -14,7 +14,7 @@ dialog.answers = [];
 dialog.question = 'Выходной день. Вы с мамой идете по торговому центру.​ Маме интересны скидки на обувь, а ты вдруг видишь в витрине магазина игрушек большую и очень интересную статую динозавра.​ Ты останавливаешься, чтобы ее разглядеть. И вдруг ты понимаешь, что ты остался один. Что ты будешь делать?​';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Стоять на месте​',
+    text: 'Стоять на месте​.',
     nextDialog: 1
 });
 dialog.answers.push({
@@ -22,11 +22,11 @@ dialog.answers.push({
     nextDialog: 3
 });
 dialog.answers.push({
-    text: 'Обратиться к кому-нибудь за помощью​',
+    text: 'Обратиться к кому-нибудь за помощью​.',
     nextDialog: 2
 });
 dialog.answers.push({
-    text: 'Пойти ее искать в магазины с обувью​',
+    text: 'Пойти ее искать в магазины с обувью​.',
     type: 'fail',
     comment: 'Если ты потерялся - надо ждать на месте. Так тебя проще найти!'
 });
@@ -37,7 +37,7 @@ dialog.answers = [];
 dialog.question = 'Ты стоишь на месте около динозавра';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Продолжать стоять',
+    text: 'Продолжать стоять.',
     nextDialog: 1
 });
 dialog.answers.push({
@@ -45,11 +45,11 @@ dialog.answers.push({
     nextDialog: 3
 });
 dialog.answers.push({
-    text: 'Обратиться к кому-нибудь за помощью​',
+    text: 'Обратиться к кому-нибудь за помощью​.',
     nextDialog: 2
 });
 dialog.answers.push({
-    text: 'Пойти ее искать в магазины с обувью​',
+    text: 'Пойти ее искать в магазины с обувью​.',
     type: 'fail',
     comment: 'Если ты потерялся - надо ждать на месте. Так тебя проще найти!'
 });
@@ -60,45 +60,80 @@ dialog.answers = [];
 dialog.question = 'К кому ты обратишься за помощью?';
 dialog.type = 'squares';
 dialog.answers.push({
-    text: 'Прохожий',
-    img: 'danger_stranger',
-    type: 'fail'
+    text: '',
+    img: 'man2',
+    type: 'fail',
+    comment: 'Не доверяй незнакомым людям!'
 });
 dialog.answers.push({
-    text: 'Работник магазина',
-    img: 'shop_service',
-    nextDialog: 3
+    text: '',
+    img: 'man1',
+    type: 'fail',
+    comment: 'Не доверяй незнакомым людям!'
 });
 dialog.answers.push({
-    text: 'Прохожий в очках',
-    img: 'stranger_with_glasses',
-    type: 'fail'
-});
-dialog.answers.push({
-    text: 'Женщина с ребенком',
-    img: 'mother_with_child',
+    text: '',
+    img: 'woman',
     nextDialog: 4
 });
-novel.dialogs.push(dialog);
-
-dialog = {};
-dialog.answers = [];
-dialog.question = '«Молодой человек, вы потерялись?»​';
-dialog.type = 'character';
-dialog.characterImg = 'shop_service';
 dialog.answers.push({
-    text: 'Да, я отстал от мамы. Можно ей позвонить с вашего телефона? Ее номер - +79.......​',
-    type: 'win'
+    text: '',
+    img: 'man3',
+    type: 'fail',
+    comment: 'Не доверяй незнакомым людям!'
+});
+dialog.answers.push({
+    text: '',
+    img: 'grandma',
+    type: 'fail',
+    comment: 'Не доверяй незнакомым людям!'
+});
+dialog.answers.push({
+    text: '',
+    img: 'worker',
+    nextDialog: 3
 });
 novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = '«Молодой человек, вы потерялись?»​';
+dialog.question = '«Молодой человек, вы потерялись? Пойдем поищем твоих родителей?»​';
 dialog.type = 'character';
-dialog.characterImg = 'mother_with_child';
+dialog.characterImg = 'worker';
 dialog.answers.push({
-    text: 'Да, я отстал от мамы. Можно ей позвонить с вашего телефона? Ее номер - +79.......​',
+    text: 'Можно позвонить маме с вашего телефона? Ее номер - +79.......​',
+    nextDialog: 5
+});
+dialog.answers.push({
+    text: 'Пойдем!',
+    type: 'fail',
+    comment: 'Если ты потерялся - надо ждать на месте. Так тебя проще найти!'
+});
+novel.dialogs.push(dialog);
+
+dialog = {};
+dialog.answers = [];
+dialog.question = '«Молодой человек, вы потерялись? Пойдем поищем твоих родителей?»​';
+dialog.type = 'character';
+dialog.characterImg = 'woman';
+dialog.answers.push({
+    text: 'Можно позвонить маме с вашего телефона? Ее номер - +79.......​',
+    nextDialog: 5
+});
+dialog.answers.push({
+    text: 'Пойдем!',
+    type: 'fail',
+    comment: 'Если ты потерялся - надо ждать на месте. Так тебя проще найти!'
+});
+novel.dialogs.push(dialog);
+
+dialog = {};
+dialog.answers = [];
+dialog.question = '«Ты где? Я тебя потеряла!»​';
+dialog.type = 'character';
+dialog.characterImg = 'woman';
+dialog.answers.push({
+    text: '«Я около магазина "Динозавры для дома" около большого динозавра.»​',
     type: 'win'
 });
 novel.dialogs.push(dialog);
@@ -114,16 +149,18 @@ dialog.answers = [];
 dialog.question = 'Вы с мамой купили все необходимое и ждете на автобусной остановке подходящий транспорт. Подходит троллейбус, мама заходит в него, а ты внезапно спотыкаешься о бордюр и падаешь. Двери троллейбуса захлопываются и он уезжает. Что делать?';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Стоять на месте и ждать',
+    text: 'Стоять на месте и ждать.',
     nextDialog: 1
 });
 dialog.answers.push({
-    text: 'Побежать вслед троллейбусу',
-    type: 'fail'
+    text: 'Побежать вслед троллейбусу.',
+    type: 'fail',
+    comment: 'Не надо никуда бежать! Мама сама за тобой приедет.'
 });
 dialog.answers.push({
-    text: 'Сесть в следующий троллейбус и попытаться ее догнать',
-    type: 'fail'
+    text: 'Сесть в следующий троллейбус и попытаться ее догнать.',
+    type: 'fail',
+    comment: 'Мама запутается - на какой остановке тебя потом искать?'
 });
 novel.dialogs.push(dialog);
 
@@ -132,16 +169,18 @@ dialog.answers = [];
 dialog.question = 'Ты стоишь на остановке. Ничего не происходит.';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Продолжать стоять на месте и ждать',
+    text: 'Продолжать стоять на месте и ждать.',
     nextDialog: 2
 });
 dialog.answers.push({
-    text: 'Побежать вслед троллейбусу',
-    type: 'fail'
+    text: 'Побежать вслед троллейбусу.',
+    type: 'fail',
+    comment: 'Не надо никуда бежать! Мама сама за тобой приедет.'
 });
 dialog.answers.push({
-    text: 'Сесть в следующий троллейбус и попытаться ее догнать',
-    type: 'fail'
+    text: 'Сесть в следующий троллейбус и попытаться ее догнать.',
+    type: 'fail',
+    comment: 'Мама запутается - на какой остановке тебя потом искать?'
 });
 novel.dialogs.push(dialog);
 
@@ -166,15 +205,15 @@ dialog.answers = [];
 dialog.question = 'Вам нужно пересаживаться на автобус. Теперь-то все под контролем, и мама никуда не потеряется! Подходит нужный номер, и ты решительно заходишь в салон первым. Но что такое? Мама загляделась в телефон и не успела за тобой. Что же делать?';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Спокойно ехать домой. Мама приедет позже',
-    type: 'fail',
-});
-dialog.answers.push({
-    text: 'Ехать до конечной',
+    text: 'Спокойно ехать домой. Мама приедет позже.',
     type: 'fail'
 });
 dialog.answers.push({
-    text: 'Попросить водителя открыть на следующей остановке',
+    text: 'Ехать до конечной.',
+    type: 'fail'
+});
+dialog.answers.push({
+    text: 'Попросить водителя открыть на следующей остановке.',
     nextDialog: 1
 });
 novel.dialogs.push(dialog);
@@ -188,7 +227,7 @@ dialog.answers.push({
     nextDialog: 2
 });
 dialog.answers.push({
-    text: 'Пойти назад, туда, где осталась мама',
+    text: 'Пойти назад, туда, где осталась мама.',
     type: 'fail'
 });
 novel.dialogs.push(dialog);
@@ -198,7 +237,7 @@ dialog.answers = [];
 dialog.question = 'Очень скоро на другом автобусе приезжает мама.';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Мам, не теряйся больше, пожалуйста.',
+    text: '«Мам, не теряйся больше, пожалуйста.»',
     type: 'win'
 });
 novel.dialogs.push(dialog);
@@ -225,10 +264,10 @@ novel.dialogs = [];
 
 dialog = {};
 dialog.answers = [];
-dialog.question = 'Ты очень устал после тяжелого дня в школе. Вечереет. Хочется побыстрей домой. А по телевизору скоро начнется твой любимый мультсериал. Как ты будешь выбирать путь?';
+dialog.question = 'Ты очень устал после тяжелого дня в школе. Вечереет. Хочется побыстрей домой - ужинать и смотреть любимый мультик. Как ты будешь выбирать путь?';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Через хорошо освещенный парк',
+    text: 'Через хорошо освещенный парк.',
     nextDialog: 1
 });
 dialog.answers.push({
@@ -242,11 +281,11 @@ dialog.answers = [];
 dialog.question = 'Как дальше?';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Сейчас ведь еще стоит лед – можно попробовать пройти по замерзшему озеру! ',
+    text: 'Сейчас ведь еще стоит лед – можно попробовать пройти по замерзшему озеру!',
     type: 'fail'
 });
 dialog.answers.push({
-    text: 'Обойти озеро по берегу',
+    text: 'Обойти озеро по берегу.',
     nextDialog: 2
 });
 novel.dialogs.push(dialog);
@@ -256,11 +295,11 @@ dialog.answers = [];
 dialog.question = 'Как дальше?';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Обойду через детскую площадку',
+    text: 'Обойду через детскую площадку.',
     nextDialog: 3
 });
 dialog.answers.push({
-    text: 'Сокращу путь через гаражи',
+    text: 'Сокращу путь через гаражи.',
     type: 'fail'
 });
 novel.dialogs.push(dialog);
@@ -270,11 +309,11 @@ dialog.answers = [];
 dialog.question = 'Как дальше?';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Срежу через пустырь',
+    text: 'Срежу через пустыр.ь',
     type: 'fail'
 });
 dialog.answers.push({
-    text: 'Лучше пройду по освещенным улицам',
+    text: 'Лучше пройду по освещенным улицам.',
     type: 'win'
 });
 novel.dialogs.push(dialog);
@@ -287,14 +326,14 @@ novel.dialogs = [];
 
 dialog = {};
 dialog.answers = [];
-dialog.question = 'В школе объявили карантин. Целый день придется сидеть дома. Одному... Но вдруг раздается звонок в дверь. Ты спрашиваешь – кто там? В ответ – молчание. Что надо сделать?';
+dialog.question = 'В школе объявили карантин. Целый день придется сидеть дома. Одному... Но вдруг раздается звонок в дверь. Ты спрашиваешь: «Кто там?» В ответ – молчание. Что надо сделать?';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Открыть',
+    text: 'Открыть.',
     type: 'fail'
 });
 dialog.answers.push({
-    text: 'Не открывать',
+    text: 'Не открывать.',
     nextDialog: 1
 });
 novel.dialogs.push(dialog);
@@ -311,14 +350,15 @@ novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = 'Откройте, почта.';
-dialog.type = 'simple';
+dialog.question = '«Откройте, почта.»';
+dialog.type = 'character';
+dialog.characterImg = 'unknown_man';
 dialog.answers.push({
-    text: 'Открыть',
+    text: 'Открыть.',
     type: 'fail'
 });
 dialog.answers.push({
-    text: 'Не открывать',
+    text: 'Не открывать.',
     nextDialog: 3
 });
 novel.dialogs.push(dialog);
@@ -335,10 +375,11 @@ novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = 'Это бабушка.';
-dialog.type = 'simple';
+dialog.question = '«Это бабушка.»';
+dialog.type = 'character';
+dialog.characterImg = 'unknown_woman';
 dialog.answers.push({
-    text: 'Открыть',
+    text: 'Открыть.',
     type: 'fail'
 });
 dialog.answers.push({
@@ -369,10 +410,11 @@ novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = 'Мама.';
-dialog.type = 'simple';
+dialog.question = '«Мама.»';
+dialog.type = 'character';
+dialog.characterImg = 'unknown_woman';
 dialog.answers.push({
-    text: 'Открыть',
+    text: 'Открыть.',
     type: 'fail'
 });
 dialog.answers.push({
@@ -383,10 +425,11 @@ novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = 'Не помню. Я устала, открой пожалуйста.';
-dialog.type = 'simple';
+dialog.question = '«Не помню. Я устала, открой пожалуйста.»';
+dialog.type = 'character';
+dialog.characterImg = 'unknown_woman';
 dialog.answers.push({
-    text: 'Открыть',
+    text: 'Открыть.',
     type: 'fail'
 });
 dialog.answers.push({
@@ -397,14 +440,15 @@ novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = 'Хватит дурачиться! Открывай сейчас же!!!';
-dialog.type = 'simple';
+dialog.question = '«Хватит дурачиться! Открывай сейчас же!!!»';
+dialog.type = 'character';
+dialog.characterImg = 'unknown_woman';
 dialog.answers.push({
-    text: 'Открыть',
+    text: 'Открыть.',
     type: 'fail'
 });
 dialog.answers.push({
-    text: 'Не открывать',
+    text: 'Не открывать.',
     nextDialog: 10
 });
 novel.dialogs.push(dialog);
@@ -421,10 +465,11 @@ novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = 'Мама перепугалась не на шутку. Она вызвала полицию, чтобы поймать этих злоумышленников! Раздается звонок в домофон. "Откройте, это полиция!"';
-dialog.type = 'simple';
+dialog.question = 'Мама перепугалась не на шутку. Она вызвала полицию, чтобы поймать этих злоумышленников! Раздается звонок в домофон. «Откройте, это полиция!»';
+dialog.type = 'character';
+dialog.characterImg = 'unknown_man';
 dialog.answers.push({
-    text: 'Открыть',
+    text: 'Открыть.',
     type: 'fail'
 });
 dialog.answers.push({
@@ -460,22 +505,23 @@ novel.locationName = 'Stranger';
 novel.dialogs = [];
 dialog = {};
 dialog.answers = [];
-dialog.question = 'К тебе подходит человек. Он говорит: "Представляешь, я нашел за гаражами, неподалеку, трех щенков! Хочешь посмотреть?"';
-dialog.type = 'simple';
+dialog.question = 'К тебе подходит человек. Он говорит: «Представляешь, я нашел за гаражами, неподалеку, трех щенков! Хочешь посмотреть?»';
+dialog.type = 'character';
+dialog.characterImg = 'stranger1';
 dialog.answers.push({
-    text: 'Да, хочу!',
+    text: '«Да, хочу!»',
     type: 'fail'
 });
 dialog.answers.push({
-    text: 'Мне не разрешают общаться с незнакомыми.',
+    text: '«Мне не разрешают общаться с незнакомыми.»',
     nextDialog: 1
 });
 dialog.answers.push({
-    text: 'Я тебя не знаю!',
+    text: 'Кричать «Я тебя не знаю!»',
     nextDialog: 2
 });
 dialog.answers.push({
-    text: 'ПОЖАААР!',
+    text: 'Кричать «ПОЖАААР!»',
     nextDialog: 2
 });
 novel.dialogs.push(dialog);
@@ -483,17 +529,18 @@ novel.dialogs.push(dialog);
 dialog = {};
 dialog.answers = [];
 dialog.question = 'Тогда давай знакомиться. Меня зовут Аркадий Валентинович.';
-dialog.type = 'simple';
+dialog.type = 'character';
+dialog.characterImg = 'stranger1';
 dialog.answers.push({
-    text: 'А меня зовут %name%, я живу вон в том доме.',
+    text: '«А меня зовут %name%, я живу вон в том доме.»',
     type: 'fail'
 });
 dialog.answers.push({
-    text: 'Я тебя не знаю!',
+    text: 'Кричать «Я тебя не знаю!»',
     nextDialog: 2
 });
 dialog.answers.push({
-    text: 'ПОЖАААР!',
+    text: 'Кричать «ПОЖАААР!»',
     nextDialog: 2
 });
 novel.dialogs.push(dialog);
@@ -516,17 +563,18 @@ novel.dialogs = [];
 dialog = {};
 dialog.answers = [];
 dialog.question = 'По дороге в школу к тебе подходит незнакомый парень в кепке. Он говорит: «У меня есть на планшете интересная игра, хочешь дам поиграть?»';
-dialog.type = 'simple';
+dialog.type = 'character';
+dialog.characterImg = 'stranger2';
 dialog.answers.push({
-    text: 'Да, хочу!',
+    text: '«Да, хочу!»',
     type: 'fail'
 });
 dialog.answers.push({
-    text: 'Я тебя не знаю!',
+    text: 'Кричать «Я тебя не знаю!»',
     nextDialog: 1
 });
 dialog.answers.push({
-    text: 'ПОЖАААР!',
+    text: 'Кричать «ПОЖАААР!»',
     nextDialog: 1
 });
 novel.dialogs.push(dialog);
@@ -549,17 +597,18 @@ novel.dialogs = [];
 dialog = {};
 dialog.answers = [];
 dialog.question = 'На детской площадке к тебе подходит незнакомая женщина. Она говорит: «Ты знаешь, твоя бабушка попросила меня тебя найти, ей очень нужна твоя помощь! Пойдем, я тебя провожу!»';
-dialog.type = 'simple';
+dialog.type = 'character';
+dialog.characterImg = 'stranger3';
 dialog.answers.push({
-    text: 'Бабушка в беде, ей нужна помощь? Нельзя терять ни минуты!',
+    text: 'Бабушка в беде, ей нужна помощь! Нельзя терять ни минуты!',
     type: 'fail'
 });
 dialog.answers.push({
-    text: 'Я тебя не знаю!',
+    text: 'Кричать «Я тебя не знаю!»',
     nextDialog: 1
 });
 dialog.answers.push({
-    text: 'ПОЖАААР!',
+    text: 'Кричать «ПОЖАААР!»',
     nextDialog: 1
 });
 dialog.answers.push({

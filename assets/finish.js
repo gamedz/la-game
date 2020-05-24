@@ -18,7 +18,6 @@ const SceneFinish = new Phaser.Class({
     },
 
     create: function() {
-        console.log(previousNovelType);
         this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'diplom');
 
         txtName = this.add.text(this.cameras.main.centerX, 390, playerName, {
