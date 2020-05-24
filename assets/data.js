@@ -1,15 +1,15 @@
-var playerName = '';
-var progress = 0;
-var passedStrangersNumber = 0;
-var passedPuzzlesNumber = 0;
+playerName = '';
+progress = 0;
+passedStrangersNumber = 0;
+passedPuzzlesNumber = 0;
 
-var novels = [];
+novels = [];
 
-var novel = {};
+novel = {};
 novel.locationName = 'Shop';
 novel.dialogs = [];
 
-var dialog = {};
+dialog = {};
 dialog.answers = [];
 dialog.question = 'Выходной день. Вы с мамой идете по торговому центру.​ Маме интересны скидки на обувь, а ты вдруг видишь в витрине магазина игрушек большую и очень интересную статую динозавра.​ Ты останавливаешься, чтобы ее разглядеть. И вдруг ты понимаешь, что ты остался один. Что ты будешь делать?​';
 dialog.type = 'simple';
@@ -67,7 +67,7 @@ dialog.answers.push({
 dialog.answers.push({
     text: 'Работник магазина',
     img: 'shop_service',
-    type: 'win'
+    nextDialog: 3
 });
 dialog.answers.push({
     text: 'Прохожий в очках',
@@ -77,7 +77,18 @@ dialog.answers.push({
 dialog.answers.push({
     text: 'Женщина с ребенком',
     img: 'mother_with_child',
-    nextDialog: 3
+    nextDialog: 4
+});
+novel.dialogs.push(dialog);
+
+dialog = {};
+dialog.answers = [];
+dialog.question = '«Молодой человек, вы потерялись?»​';
+dialog.type = 'character';
+dialog.characterImg = 'shop_service';
+dialog.answers.push({
+    text: 'Да, я отстал от мамы. Можно ей позвонить с вашего телефона? Ее номер - +79.......​',
+    type: 'win'
 });
 novel.dialogs.push(dialog);
 
@@ -86,7 +97,6 @@ dialog.answers = [];
 dialog.question = '«Молодой человек, вы потерялись?»​';
 dialog.type = 'character';
 dialog.characterImg = 'mother_with_child';
-dialog.characterName = 'Женщина с ребенком';
 dialog.answers.push({
     text: 'Да, я отстал от мамы. Можно ей позвонить с вашего телефона? Ее номер - +79.......​',
     type: 'win'
@@ -584,89 +594,3 @@ dialog.answers.push({
 dialog.question = 'Вы попали в пробку. Самое время собрать паззл, чтобы скоротать время!';
 dialog.type = 'simple';
 puzzle_novel.dialogs.push(dialog);
-
-var SceneIntro = new Phaser.Class({
-
-    Extends: Phaser.Scene,
-
-    initialize:
-
-        function SceneIntro() {
-            Phaser.Scene.call(this, {
-                key: 'sceneIntro'
-            });
-        },
-
-    preload: function() {
-        this.load.image('introBack', 'assets/intro/back.png');
-        this.load.image('btnStart', 'assets/intro/btnStart.png');
-        this.load.html('nameform', 'assets/nameform.html');
-    },
-
-    create: function() {
-        this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'introBack');
-        var txtHello = this.add.text(this.cameras.main.centerX, 120, 'Привет!', {
-                fontFamily: "rotondac",
-                color: '#2794D1',
-                fontSize: '35px',
-                // align: 'right',
-                alpha: 0,
-                // stroke: 'black',
-                // strokeThickness: 2,
-                // shadow: {
-                //     offsetX: 0,
-                //     offsetY: -1,
-                //     color: 'black',
-                //     blur: 2,
-                //     fill: true,
-                //     stroke: true
-                // }
-            })
-            .setOrigin(0.5);
-
-        element = this.add.dom(this.cameras.main.centerX - 100, -100).createFromCache('nameform');
-
-        btnStart = this.add.image(this.cameras.main.centerX + 200, -100, 'btnStart')
-            .setInteractive()
-            .on('pointerdown', function() {
-
-                inputText = element.getChildByName('nameField');
-
-                playerName = inputText.value;
-
-                progress = 0;
-                this.scene.start('sceneMap', {
-                    isRaising: true
-                });
-            }, this);
-
-        this.tweens.add({
-            targets: [element, btnStart],
-            y: 430,
-            duration: 1000,
-            ease: 'Power3'
-        });
-    }
-});
-
-var config = {
-    type: Phaser.AUTO,
-    parent: 'phaser-example',
-    width: 1024,
-    height: 768,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: {
-                y: 300
-            },
-            debug: false
-        }
-    },
-    dom: {
-        createContainer: true
-    },
-    scene: [SceneIntro, SceneNovel, SceneMap, SceneWin, SceneFail, ScenePack, ScenePuzzle, SceneFinish]
-};
-
-var game = new Phaser.Game(config);

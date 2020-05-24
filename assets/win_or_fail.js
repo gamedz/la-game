@@ -1,4 +1,4 @@
-var SceneWin = new Phaser.Class({
+const SceneWin = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
@@ -51,7 +51,7 @@ var SceneWin = new Phaser.Class({
     }
 });
 
-var SceneFail = new Phaser.Class({
+const SceneFail = new Phaser.Class({
 
     Extends: Phaser.Scene,
 

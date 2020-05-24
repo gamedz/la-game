@@ -1,4 +1,4 @@
-var SceneNovel = new Phaser.Class({
+const SceneNovel = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
@@ -41,6 +41,8 @@ var SceneNovel = new Phaser.Class({
         this.load.image('SquareChosen', 'assets/novel/SquareChosen.png');
 
         this.load.image('Title', 'assets/novel/Title.png');
+        if ( dialog.type == 'character' )
+            this.load.image('Character' + dialog.characterImg, 'assets/novel/' + dialog.characterImg + '.png' );
 
         answers.forEach(function(answer, i) {
             this.load.image('portrait' + i, 'assets/novel/' + answer.img + '.png');
@@ -54,18 +56,27 @@ var SceneNovel = new Phaser.Class({
         imgTitle = this.add.image(this.cameras.main.centerX, dialog.type == 'squares' ? 70 : 165, 'Title');
         imgTitle.setAlpha(0);
         if (dialog.type == 'squares')
-            imgTitle.setScale(1, 0.35);
+            imgTitle.setScale(1, 0.35);        
 
         txtQuestion = this.add.text(this.cameras.main.centerX, dialog.type == 'squares' ? 70 : 165, question, {
             color: 'black',
             fontFamily: "rotondac",
             fontSize: '30px',
             wordWrap: {
-                width: 850,
+                width: 900,
                 useAdvancedWrap: true
             }
         });
         txtQuestion.setOrigin(0.5);
+
+        if ( dialog.type == 'character' )
+        {
+            txtQuestion.setX(320);
+            txtQuestion.setAlign('left');
+            txtQuestion.setOrigin(0, 0.5);
+
+            imgCharacter = this.add.image(190, 170, 'Character' + dialog.characterImg );
+        }
 
         this.tweens.add({
             targets: [imgTitle, txtQuestion],
@@ -79,6 +90,7 @@ var SceneNovel = new Phaser.Class({
         txtQuestion.setAlpha(0);
 
         answers.forEach(function(answer, i) {
+            answer.isOver = false;
             answer.side = i % 2 * 2 - 1;
 
             answer.text = answer.text.replace('%name%', playerName);
@@ -116,7 +128,11 @@ var SceneNovel = new Phaser.Class({
                 answer.txtAnswer = this.add.text(-1000, answer.posY, answer.text, {
                         fontFamily: "rotondac",
                         color: 'black',
-                        fontSize: '25px'
+                        fontSize: '25px',
+                        wordWrap: {
+                            width: 600,
+                            useAdvancedWrap: true
+                        }
                     })
                     .setOrigin(0.5);
 

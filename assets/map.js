@@ -1,6 +1,6 @@
 let paths = [];
 
-var SceneMap = new Phaser.Class({
+const SceneMap = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
@@ -27,6 +27,8 @@ var SceneMap = new Phaser.Class({
         this.load.image('BigCircle', 'assets/BigCircle.png');
         this.load.image('BigCircleEmpty', 'assets/BigCircleEmpty.png');
         this.load.image('stranger', 'assets/stranger.png');
+        this.load.image('btnStartLocation', 'assets/btnStartLocation.png');
+        this.load.image('puzzle', 'assets/puzzle.png');
 
         locationTitles = ['Старт', 'ТЦ', 'Остановка', 'Автобус', 'Лес', 'Школа', 'Дом', 'Финиш'];
         locationPositions = [
@@ -90,24 +92,7 @@ var SceneMap = new Phaser.Class({
         allPathPointImgs = [];
 
         graphics = this.add.graphics();
-
-        var txtHello = this.add.text(this.cameras.main.centerX, 20, playerName == '' ? 'Привет!' : 'Привет, ' + playerName + '!', {
-            fontFamily: "rotondac",
-            color: 'white',
-            fontSize: '25px',
-            align: 'right',
-            alpha: 0
-        });
-        txtHello.setOrigin(0.5);
-        txtHello.setStroke('black', 2);
-
-        this.tweens.add({
-            targets: txtHello,
-            alpha: 1,
-            duration: 1000,
-            ease: 'Quad.easeInOut',
-            yoyo: false
-        });
+        
 
         follower = {
             moveProgress: moveFromMiddle ? 0.5 : 0,
@@ -159,7 +144,7 @@ var SceneMap = new Phaser.Class({
                 paths.push(path);
 
                 pathPointImgs = [];
-                for (var j = 0; j < pointsNumbers[i-1]; j++) {
+                for (let j = 0; j < pointsNumbers[i-1]; j++) {
                     pos = new Phaser.Math.Vector2();
                     path.getPoint((1 / pointsNumbers[i-1]) * j, pos);
 
@@ -192,35 +177,11 @@ var SceneMap = new Phaser.Class({
                 }
             }
 
-
-
-            // var txtTitle = this.add.text(locationPositions[i][0], locationPositions[i][1] + 70, locationTitles[i], {
-            //     fontFamily: "rotondac_bold",
-            //     color: 'white',
-            //     fontSize: '20px'
-            // });
-            // txtTitle.setOrigin(0.5);
-            // txtTitle.setStroke('black', 2);
-
         }, this);
 
 
         hero = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'hero');
         hero.setOrigin(0, 1);
-        hero
-            .setInteractive()
-            .on('pointerdown', function() {
-                type = 'simple';
-                if (beforeStranger)
-                    type = 'stranger';
-                if (beforePuzzle)
-                    type = 'puzzle';
-                console.log(type);
-                this.scene.start('sceneNovel', {
-                    dialogIndex: 0,
-                    type: type
-                });
-            }, this);
 
         // debugStr = 'Дебаг: isRaising=' + this.isRaising
         //     + '\n beforePuzzle=' + beforePuzzle 
@@ -252,7 +213,7 @@ var SceneMap = new Phaser.Class({
                     passedStrangersNumber++;
                 else                    
                     progress++;
-                
+
                 this.scene.start('sceneMap', {
                     isRaising: true
                 });
@@ -279,7 +240,7 @@ var SceneMap = new Phaser.Class({
     },
     update: function() {
 
-        for (var i = 0; i < pointsNumbers[progress]; i++) {
+        for (let i = 0; i < pointsNumbers[progress]; i++) {
             imgName = (i == 0) ? 'BigCircle' : 'LittleCircle';
             if (follower.moveProgress >= i / pointsNumbers[progress])
                 allPathPointImgs[progress][i].setTexture(imgName);
@@ -297,11 +258,32 @@ var SceneMap = new Phaser.Class({
         }
     },
     afterMoveComplete: function() {
+        currentScene = this;
+        btnStartLocation = this.add.image(follower.pos.x, follower.pos.y + 50, 'btnStartLocation');
+        btnStartLocation.setScale(0);
+        btnStartLocation.setOrigin(0.5);
+        btnStartLocation.setInteractive()
+        .on('pointerdown', function() {
+                currentScene.btnStartLocationClicked();                
+            }, this);
+
+        this.tweens.add({
+                targets: btnStartLocation,
+                scale: {
+                    from: 0,
+                    to: 1
+                },
+                ease: 'Quad.easeOutBack',
+                duration: 250,
+                yoyo: false
+            });
+
+
         if (!moveOnlyToMiddle)
             return;
 
         if (progress == 3 || progress == 4 || progress == 5) {
-            stranger = this.add.image(follower.pos.x + 50, follower.pos.y + 50, 'stranger')
+            stranger = this.add.image(follower.pos.x + 60, follower.pos.y + 50, 'stranger')
                 .setOrigin(0.5, 1);
 
             stranger.scaleY = 0;
@@ -316,16 +298,37 @@ var SceneMap = new Phaser.Class({
                 yoyo: false
             });
         }
-
-        if ( beforePuzzle )
+        else if ( beforePuzzle )
         {
-            this.scene.start('sceneNovel', {
-                dialogIndex: 0,
-                type: 'puzzle'
+            puzzle = this.add.image(follower.pos.x + 80, follower.pos.y, 'puzzle')
+                .setOrigin(0.5, 0.5)
+                .setScale(0);
+
+            this.children.bringToTop(hero);
+
+            this.tweens.add({
+                targets: puzzle,
+                scale: {
+                    from: 0,
+                    to: 1
+                },
+                ease: 'Quad.easeOutBack',
+                duration: 500,
+                yoyo: false
             });
         }
-
-
-
+    },
+    btnStartLocationClicked: function()
+    {
+        type = 'simple';
+                if (beforeStranger)
+                    type = 'stranger';
+                if (beforePuzzle)
+                    type = 'puzzle';
+                console.log(type);
+                this.scene.start('sceneNovel', {
+                    dialogIndex: 0,
+                    type: type
+                });
     }
 });

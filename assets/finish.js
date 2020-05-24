@@ -1,5 +1,4 @@
-
-var SceneFinish = new Phaser.Class({
+const SceneFinish = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
@@ -12,8 +11,7 @@ var SceneFinish = new Phaser.Class({
             });
         },
 
-    init: function(data) {
-    },
+    init: function(data) {},
 
     preload: function() {
         this.load.image('diplom', 'assets/diplom.png');

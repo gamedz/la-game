@@ -1,4 +1,4 @@
-var ScenePack = new Phaser.Class({
+const ScenePack = new Phaser.Class({
 
     Extends: Phaser.Scene,
 
@@ -77,37 +77,37 @@ var ScenePack = new Phaser.Class({
         this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'forest');
 
         this.add.text(this.cameras.main.centerX, 35, 'Что взять с собой в лес?', {
-            fontFamily: "rotondac",
-            color: 'white',
-            fontSize: '45px'
-        })
-        .setOrigin(0.5)
-        .setStroke('black', 2);
+                fontFamily: "rotondac",
+                color: 'white',
+                fontSize: '45px'
+            })
+            .setOrigin(0.5)
+            .setStroke('black', 2);
 
         this.add.text(this.cameras.main.centerX + 275, 90, 'Возьму', {
-            fontFamily: "rotondac",
-            color: 'white',
-            fontSize: '45px'
-        })
-        .setOrigin(0.5)
-        .setStroke('black', 2);       
+                fontFamily: "rotondac",
+                color: 'white',
+                fontSize: '45px'
+            })
+            .setOrigin(0.5)
+            .setStroke('black', 2);
 
         this.add.text(this.cameras.main.centerX - 275, 90, 'Не возьму', {
-            fontFamily: "rotondac",
-            color: 'white',
-            fontSize: '45px'
-        })
-        .setOrigin(0.5)
-        .setStroke('black', 2);   
+                fontFamily: "rotondac",
+                color: 'white',
+                fontSize: '45px'
+            })
+            .setOrigin(0.5)
+            .setStroke('black', 2);
 
 
         this.add.text(this.cameras.main.centerX, 530, 'Разложи вещи в две кучки!', {
-            fontFamily: "rotondac",
-            color: 'white',
-            fontSize: '45px'
-        })
-        .setOrigin(0.5)
-        .setStroke('black', 2);    
+                fontFamily: "rotondac",
+                color: 'white',
+                fontSize: '45px'
+            })
+            .setOrigin(0.5)
+            .setStroke('black', 2);
 
         items.forEach(function(item, i) {
             item.isCorrectPlace = false;
@@ -130,24 +130,24 @@ var ScenePack = new Phaser.Class({
             gameObject.y = dragY;
         });
 
-        var currentScene = this;
+        currentScene = this;
         this.input.on('dragend', function(pointer, gameObject) {
             dragX = gameObject.x;
             dragY = gameObject.y;
-            var isLeftArea = (dragX >= 14 && dragX <= 14 + 450 && dragY >= 127 && dragY <= 127 + 372);
-            var isRightArea = (dragX >= 560 && dragX <= 560 + 450 && dragY >= 127 && dragY <= 127 + 372);
-            var item = gameObject.data.get('owner');
-            var isTrue = false;
-            var isFalse = false;
-            if ( item.isGood && isRightArea )
+            const isLeftArea = (dragX >= 14 && dragX <= 14 + 450 && dragY >= 127 && dragY <= 127 + 372);
+            const isRightArea = (dragX >= 560 && dragX <= 560 + 450 && dragY >= 127 && dragY <= 127 + 372);
+            const item = gameObject.data.get('owner');
+            let isTrue = false;
+            let isFalse = false;
+            if (item.isGood && isRightArea)
                 isTrue = true;
-            if ( item.isGood && isLeftArea )
+            if (item.isGood && isLeftArea)
                 isFalse = true;
-            if ( !item.isGood && isLeftArea )
+            if (!item.isGood && isLeftArea)
                 isTrue = true;
-            if ( !item.isGood && isRightArea )
-                isFalse = true;            
-            currentScene.setTrueness(item, 
+            if (!item.isGood && isRightArea)
+                isFalse = true;
+            currentScene.setTrueness(item,
                 isTrue, isFalse,
                 gameObject);
         }, this);
@@ -165,12 +165,11 @@ var ScenePack = new Phaser.Class({
     doCheck() {
         isVictory = true;
         items.forEach(function(item, i) {
-            if ( !item.isCorrectPlace )
+            if (!item.isCorrectPlace)
                 isVictory = false;
-        }, this);        
-        if ( isVictory )
-        {
-            this.scene.start('sceneWin' );
+        }, this);
+        if (isVictory) {
+            this.scene.start('sceneWin');
         }
     },
     update: function() {
