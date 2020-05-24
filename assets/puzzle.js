@@ -25,7 +25,6 @@ const ScenePuzzle = new Phaser.Class({
     },
 
     create: function() {
-        console.log(previousNovelType);
         this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'defaultBack');
         this.add.image(this.cameras.main.centerX - 2, this.cameras.main.centerY - 2, 'puzzleBack');
 
@@ -138,7 +137,7 @@ const ScenePuzzle = new Phaser.Class({
 
         }, this);
 
-        this.add.text(900, 20, 'Чит: пройти', {
+        this.add.text(1020, 10, ' ', {
                 color: 'white',
                 fontSize: '10px'
             })

@@ -19,7 +19,7 @@ dialog.answers.push({
 });
 dialog.answers.push({
     text: 'Стоять и кричать «МАААААМААА!!!»​',
-    nextDialog: 3
+    nextDialog: 4
 });
 dialog.answers.push({
     text: 'Обратиться к кому-нибудь за помощью​.',
@@ -42,7 +42,7 @@ dialog.answers.push({
 });
 dialog.answers.push({
     text: 'Стоять и кричать «МАААААМААА!!!»​',
-    nextDialog: 3
+    nextDialog: 4
 });
 dialog.answers.push({
     text: 'Обратиться к кому-нибудь за помощью​.',
@@ -107,7 +107,7 @@ dialog.answers.push({
 dialog.answers.push({
     text: 'Пойдемте!',
     type: 'fail',
-    comment: 'Если ты потерялся - надо ждать на месте. Никуда не уходи с незнакомыми людьми.'
+    comment: 'Если ты потерялся - надо ждать на месте. А если есть возможность - позвони маме и скажи, где ты.'
 });
 novel.dialogs.push(dialog);
 
@@ -123,13 +123,13 @@ dialog.answers.push({
 dialog.answers.push({
     text: 'Пойдемте!',
     type: 'fail',
-    comment: 'Если ты потерялся - надо ждать на месте. Никуда не уходи с незнакомыми людьми.'
+    comment: 'Если ты потерялся - надо ждать на месте. А если есть возможность - позвони маме и скажи, где ты.'
 });
 novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = '«Ты где? Я тебя потеряла!»​';
+dialog.question = 'Ты дозвонился до мамы. Она спрашивает: «Ты где? Я тебя потеряла!»​';
 dialog.type = 'character';
 dialog.characterImg = 'mother';
 dialog.answers.push({
@@ -160,7 +160,7 @@ dialog.answers.push({
 dialog.answers.push({
     text: 'Сесть в следующий троллейбус и попытаться ее догнать.',
     type: 'fail',
-    comment: 'Не уезжай оттуда, где ты потерялся. Мама запутается - на какой остановке тебя потом искать?'
+    comment: 'Не уезжай оттуда, где ты потерялся. Мама запутается - на какой остановке тебя искать?'
 });
 novel.dialogs.push(dialog);
 
@@ -180,14 +180,15 @@ dialog.answers.push({
 dialog.answers.push({
     text: 'Сесть в следующий троллейбус и попытаться ее догнать.',
     type: 'fail',
-    comment: 'Не уезжай оттуда, где ты потерялся. Мама запутается - на какой остановке тебя потом искать?'
+    comment: 'Не уезжай оттуда, где ты потерялся. Мама запутается - на какой остановке тебя искать?'
 });
 novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
 dialog.question = 'Наконец, ты видишь впереди маму, бегущую навстречу. Она, конечно же, сразу обнаружила, что уехала без тебя, вышла на ближайшей остановке и вернулась назад.';
-dialog.type = 'simple';
+dialog.type = 'character';
+dialog.characterImg = 'mother';
 dialog.answers.push({
     text: 'Ура!',
     type: 'win'
@@ -211,8 +212,8 @@ dialog.answers.push({
 });
 dialog.answers.push({
     text: 'Ехать до конечной.',
-    type: 'Мама будет тебя искать на ближайшей остановке. Если ты уедешь дальше, она проищет тебя целый день!',
-    comment: ''
+    type: 'fail',
+    comment: 'Мама будет тебя искать на ближайшей остановке. Если ты уедешь дальше, она проищет тебя целый день!'
 });
 dialog.answers.push({
     text: 'Попросить водителя открыть на следующей остановке.',
@@ -238,12 +239,14 @@ novel.dialogs.push(dialog);
 dialog = {};
 dialog.answers = [];
 dialog.question = 'Очень скоро на другом автобусе приезжает мама.';
-dialog.type = 'simple';
+dialog.type = 'character';
+dialog.characterImg = 'mother';
 dialog.answers.push({
     text: '«Мам, не теряйся больше, пожалуйста.»',
     type: 'win'
 });
 novel.dialogs.push(dialog);
+
 novels.push(novel);
 
 novel = {};
@@ -479,8 +482,7 @@ novel.dialogs.push(dialog);
 dialog = {};
 dialog.answers = [];
 dialog.question = 'Мама перепугалась не на шутку. Она вызвала полицию, чтобы поймать этих злоумышленников! Раздается звонок в домофон. «Откройте, это полиция!»';
-dialog.type = 'character';
-dialog.characterImg = 'unknown_man';
+dialog.type = 'simple';
 dialog.answers.push({
     text: 'Открыть.',
     type: 'fail',
@@ -525,7 +527,7 @@ dialog.characterImg = 'stranger1';
 dialog.answers.push({
     text: '«Да, хочу!»',
     type: 'fail',
-    comment: 'Избегай незнакомых людей. Громко скажи "Я тебя не знаю!" или "Пожар", чтобы прилечь внимание и испугать преступника.'
+    comment: 'Избегай незнакомых людей. Громко скажи "Я тебя не знаю!" или "Пожар", чтобы привлечь внимание и испугать преступника.'
 });
 dialog.answers.push({
     text: '«Мне не разрешают общаться с незнакомыми.»',
@@ -658,6 +660,6 @@ dialog.answers.push({
     text: 'Собрать паззл!',
     type: 'puzzle'
 });
-dialog.question = 'Вы попали в пробку. Самое время собрать паззл, чтобы скоротать время!';
+dialog.question = 'Вы попали в пробку. Самое время собрать паззл, чтобы не скучать!';
 dialog.type = 'simple';
 puzzle_novel.dialogs.push(dialog);

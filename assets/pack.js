@@ -104,7 +104,11 @@ const ScenePack = new Phaser.Class({
         this.add.text(this.cameras.main.centerX, 530, 'Перетаскивай вправо то, что пригодится в лесу, а влево – то, что лучше оставить.', {
                 fontFamily: "rotondac",
                 color: 'white',
-                fontSize: '45px'
+                fontSize: '30px',
+            wordWrap: {
+                width: 900,
+                useAdvancedWrap: true
+            }
             })
             .setOrigin(0.5)
             .setStroke('black', 2);

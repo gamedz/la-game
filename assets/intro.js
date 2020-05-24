@@ -69,6 +69,12 @@ const SceneIntro = new Phaser.Class({
             duration: 1000,
             ease: 'Power3'
         });        
+
+                this.add.text(20, 742, 'Над игрой работали: Игнат Глушихин, Ольга Дизастр Волкова', {
+                fontFamily: "rotondac",
+                color: 'white',
+                fontSize: '20px'
+            }); 
     }
 });
 
