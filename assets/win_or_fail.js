@@ -21,31 +21,23 @@ const SceneWin = new Phaser.Class({
         winBack = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'winBack');
         winBack.setInteractive()
             .on('pointerdown', function() {
-                if ( previousNovelType == 'simple' )
-                {
+                if (previousNovelType == 'simple') {
                     progress++;
-                }
-                else if ( previousNovelType == 'stranger' )
-                {
+                } else if (previousNovelType == 'stranger') {
                     passedStrangersNumber++;
-                }
-                else if ( previousNovelType == 'puzzle' )
-                {
+                } else if (previousNovelType == 'puzzle') {
                     passedPuzzlesNumber++;
                 }
 
-                if ( progress == 7 )
-                {
+                if (progress == 7) {
                     this.scene.start('sceneFinish');
-                }
-                else
-                {
+                } else {
                     this.scene.start('sceneMap', {
-                    isRaising: true
+                        isRaising: true
                     });
                 }
-                
-                
+
+
             }, this);
     }
 });
@@ -82,27 +74,30 @@ const SceneFail = new Phaser.Class({
                 });
             }, this);
 
-        lose_why = this.add.image(724, 310, 'lose_why');
-        txtComment = this.add.text(724, 310, this.comment, {
-            fontFamily: "rotondac",
-            color: 'black',
-            fontSize: '40px',
-            wordWrap: {
-                width: 350,
-                useAdvancedWrap: true
-            }
-        });
-        txtComment.setOrigin(0.5);
+        if (this.comment != '') {
+            lose_why = this.add.image(724, 310, 'lose_why');
+            txtComment = this.add.text(724, 310, this.comment, {
+                fontFamily: "rotondac",
+                color: 'black',
+                fontSize: '40px',
+                wordWrap: {
+                    width: 350,
+                    useAdvancedWrap: true
+                }
+            });
+            txtComment.setOrigin(0.5);
 
-        this.tweens.add({
-            targets: [lose_why, txtComment],
-            alpha: {
-                from: 0,
-                to: 1
-            },
-            duration: 500,
-            ease: 'Quad.easeOut'
-        });
-        txtComment.setAlpha(0);
+            this.tweens.add({
+                targets: [lose_why, txtComment],
+                alpha: {
+                    from: 0,
+                    to: 1
+                },
+                duration: 500,
+                ease: 'Quad.easeOut'
+            });
+            txtComment.setAlpha(0);
+        }
+
     }
 });

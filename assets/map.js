@@ -293,7 +293,7 @@ const SceneMap = new Phaser.Class({
     },
     afterMoveComplete: function() {
         currentScene = this;
-        btnStartLocation = this.add.image( Math.min(follower.pos.x, 928), Math.min( follower.pos.y + 50, 720), 'btnStartLocation');
+        btnStartLocation = this.add.image( Math.min(follower.pos.x, 928), Math.min( follower.pos.y + 50, 745), 'btnStartLocation');
         btnStartLocation.setScale(0);
         btnStartLocation.setOrigin(0.5);
         btnStartLocation.setInteractive()
