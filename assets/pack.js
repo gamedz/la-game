@@ -115,7 +115,7 @@ const ScenePack = new Phaser.Class({
 
         items.forEach(function(item, i) {
             item.isCorrectPlace = false;
-            this.add.image(1024 / 12 * (i + 0.5), 700, item.name)
+            this.add.image(50 + Math.random()*924, 700, item.name)
                 .setInteractive({
                     draggable: true
                 })
