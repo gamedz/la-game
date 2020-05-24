@@ -20,7 +20,6 @@ var SceneMap = new Phaser.Class({
     preload: function() {
         this.load.image('locationHitArea', 'assets/locationHitArea.png');
         this.load.image('mapFront', 'assets/mapFront.png');
-        this.load.image('flag', 'assets/flag.png');
         this.load.image('hero', 'assets/hero.png');
         this.load.image('check', 'assets/check.png');
         this.load.image('LittleCircle', 'assets/LittleCircle.png');

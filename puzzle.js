@@ -31,7 +31,10 @@ var ScenePuzzle = new Phaser.Class({
                 console.log(previousNovelType);
         this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'defaultBack');
         this.add.image(this.cameras.main.centerX - 2, this.cameras.main.centerY - 2, 'puzzleBack');
-        pieces = [
+
+        if ( passedPuzzlesNumber == 0 )
+        {
+            pieces = [
         {
             offset: [93,93]
         },{
@@ -58,8 +61,40 @@ var ScenePuzzle = new Phaser.Class({
             offset: [102,138]
         }
         ];
+        }
+        else
+        {
+            pieces = [
+        {
+            offset: [93,93]
+        },{
+            offset: [89,93]
+        },{
+            offset: [150,93]
+        },{
+            offset: [129,93]
+        },{
+            offset: [93,133]
+        },{
+            offset: [129,149]
+        },{
+            offset: [112,139]
+        },{
+            offset: [129,92]
+        },{
+            offset: [93,130]
+        },{
+            offset: [134,115]
+        },{
+            offset: [106,146]
+        },{
+            offset: [111,143]
+        }
+        ];
+        }
+        
         pieces.forEach(function(piece, i) {
-            piece.img = this.add.image( 100 + 50 * i, 718, 'piece' + i + '_' + passedPuzzlesNumber );
+            piece.img = this.add.image( Math.random() * 924 + 50, 700 + Math.random()*68, 'piece' + i + '_' + passedPuzzlesNumber );
 
                 piece.img.setOrigin(piece.offset[0]/piece.img.width,piece.offset[1]/piece.img.height)
                 .setInteractive({
