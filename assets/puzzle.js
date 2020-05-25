@@ -14,6 +14,23 @@ const ScenePuzzle = new Phaser.Class({
     init: function(data) {},
 
     preload: function() {
+        var gfxProgress = this.add.graphics();
+        var txtProgress = this.add.text( 50, 334, 'Загрузка...', {
+                fontFamily: "rotondac",
+                color: '#ffffff',
+                fontSize: '35px'
+            });
+        this.load.on('progress', function(value) {
+
+            gfxProgress.clear();
+            gfxProgress.fillStyle(0xffffff, 1);
+            gfxProgress.fillRect(50, 374, 924 * value, 20);
+        });
+        this.load.on('complete', function() {
+            txtProgress.destroy();
+            gfxProgress.destroy();
+        });
+        
         for (let i = 0; i < 12; i++) {
             this.load.image('piece' + i + '_' + passedPuzzlesNumber, 'assets/puzzle/' + passedPuzzlesNumber + '/' + i + '.png');
         }
@@ -127,7 +144,7 @@ const ScenePuzzle = new Phaser.Class({
         currentScene = this;
         this.input.on('dragend', function(pointer, gameObject) {
 
-            if (suitablePos.distance(currentPos) < 20) {
+            if (suitablePos.distance(currentPos) < 30) {
 
                 gameObject.data.get('owner').placed = true;
                 gameObject.disableInteractive();

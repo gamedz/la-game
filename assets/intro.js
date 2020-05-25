@@ -11,13 +11,36 @@ const SceneIntro = new Phaser.Class({
         },
 
     preload: function() {
+        var gfxProgress = this.add.graphics();
+        var txtProgress = this.add.text( 50, 334, 'Загрузка...', {
+                fontFamily: "rotondac",
+                color: '#ffffff',
+                fontSize: '35px'
+            });
+        this.load.on('progress', function(value) {
+
+            gfxProgress.clear();
+            gfxProgress.fillStyle(0xffffff, 1);
+            gfxProgress.fillRect(50, 374, 924 * value, 20);
+        });
+        this.load.on('complete', function() {
+            txtProgress.destroy();
+            gfxProgress.destroy();
+        });
+
         this.load.image('introBack', 'assets/intro/back.png');
         this.load.image('btnStartGame', 'assets/btnStartGame.png');
         this.load.html('nameform', 'assets/nameform.html');
     },
 
     create: function() {
-        this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'introBack');
+        this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'introBack')
+        .setInteractive()
+        .on('pointerdown', function() {
+            console.log(game.input.mousePointer.x + '   ' + game.input.mousePointer.y);
+
+        }, this );
+
         const txtHello = this.add.text(this.cameras.main.centerX, 120, 'Привет!', {
                 fontFamily: "rotondac",
                 color: '#2794D1',
@@ -83,15 +106,10 @@ const config = {
     parent: 'phaser-example',
     width: 1024,
     height: 768,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: {
-                y: 300
-            },
-            debug: false
-        }
-    },
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH         
+    },    
     dom: {
         createContainer: true
     },

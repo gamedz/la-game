@@ -14,6 +14,23 @@ const SceneWin = new Phaser.Class({
     init: function(data) {},
 
     preload: function() {
+        var gfxProgress = this.add.graphics();
+        var txtProgress = this.add.text( 50, 334, 'Загрузка...', {
+                fontFamily: "rotondac",
+                color: '#ffffff',
+                fontSize: '35px'
+            });
+        this.load.on('progress', function(value) {
+
+            gfxProgress.clear();
+            gfxProgress.fillStyle(0xffffff, 1);
+            gfxProgress.fillRect(50, 374, 924 * value, 20);
+        });
+        this.load.on('complete', function() {
+            txtProgress.destroy();
+            gfxProgress.destroy();
+        });
+
         this.load.image('winBack', 'assets/win.png');
     },
 
@@ -59,6 +76,23 @@ const SceneFail = new Phaser.Class({
     },
 
     preload: function() {
+        var gfxProgress = this.add.graphics();
+        var txtProgress = this.add.text( 50, 334, 'Загрузка...', {
+                fontFamily: "rotondac",
+                color: '#ffffff',
+                fontSize: '35px'
+            });
+        this.load.on('progress', function(value) {
+
+            gfxProgress.clear();
+            gfxProgress.fillStyle(0xffffff, 1);
+            gfxProgress.fillRect(50, 374, 924 * value, 20);
+        });
+        this.load.on('complete', function() {
+            txtProgress.destroy();
+            gfxProgress.destroy();
+        });
+        
         this.load.image('lose', 'assets/lose.png');
         this.load.image('lose_why', 'assets/lose_why.png');
     },
