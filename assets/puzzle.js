@@ -30,7 +30,7 @@ const ScenePuzzle = new Phaser.Class({
             txtProgress.destroy();
             gfxProgress.destroy();
         });
-        
+
         for (let i = 0; i < 12; i++) {
             this.load.image('piece' + i + '_' + passedPuzzlesNumber, 'assets/puzzle/' + passedPuzzlesNumber + '/' + i + '.png');
         }
@@ -131,7 +131,7 @@ const ScenePuzzle = new Phaser.Class({
             suitablePos.x = gameObject.data.get('owner').suitableX;
             suitablePos.y = gameObject.data.get('owner').suitableY;
 
-            if (suitablePos.distance(currentPos) < 20) {
+            if (suitablePos.distance(currentPos) < 30) {
                 gameObject.x = suitablePos.x;
                 gameObject.y = suitablePos.y;
             } else {
