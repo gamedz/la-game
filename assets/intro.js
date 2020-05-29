@@ -34,7 +34,7 @@ const SceneIntro = new Phaser.Class({
     },
 
     create: function() {
-        return;this.add.text(this.cameras.main.centerX, 120, '', {
+        return;this.add.text(this.cameras.main.centerX, 120, 'test', {
                 fontFamily: "rotondac",
                 color: '#2794D1',
                 fontSize: '35px',
