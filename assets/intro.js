@@ -34,6 +34,13 @@ const SceneIntro = new Phaser.Class({
     },
 
     create: function() {
+        return;this.add.text(this.cameras.main.centerX, 120, '', {
+                fontFamily: "rotondac",
+                color: '#2794D1',
+                fontSize: '35px',
+                alpha: 0,
+            })
+            .setOrigin(0.5);
         this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'introBack')
         .setInteractive()
         .on('pointerdown', function() {
