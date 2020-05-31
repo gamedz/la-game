@@ -204,7 +204,7 @@ const ScenePuzzle = new Phaser.Class({
         }
     },
     appearNextBtn: function() {
-        btnGo = this.add.image(this.cameras.main.centerX, 868, 'btnGo')
+        btnGo = this.add.image(this.cameras.main.centerX + 35, 868, 'btnGo')
             .setOrigin(0.5)
             .setInteractive()
             .on('pointerdown', function() {
@@ -215,7 +215,7 @@ const ScenePuzzle = new Phaser.Class({
             targets: btnGo,
             y: {
                 from: 868,
-                to: 718
+                to: 575
             },
             duration: 500,
             ease: 'Quad.easeInOut'
