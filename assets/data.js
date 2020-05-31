@@ -18,7 +18,7 @@ dialog.answers.push({
     nextDialog: 1
 });
 dialog.answers.push({
-    text: 'Стоять и кричать «МАААААМААА!!!»​',
+    text: 'Остановиться. Оглядеться. Окликнуть: «Мамааа!»​',
     nextDialog: 4
 });
 dialog.answers.push({
@@ -28,7 +28,7 @@ dialog.answers.push({
 dialog.answers.push({
     text: 'Пойти ее искать в магазины с обувью​.',
     type: 'fail',
-    comment: 'Если ты потерялся - надо ждать на месте. Так тебя проще найти!'
+    comment: 'Где бы ты ни потерялся - помни «Правило трех О»​: \r\n - Остановись\r\n - Оглянись\r\n - Окликни\r\nНе уходи далеко с места, так тебя будет проще найти!'
 });
 novel.dialogs.push(dialog);
 
@@ -51,7 +51,7 @@ dialog.answers.push({
 dialog.answers.push({
     text: 'Пойти ее искать в магазины с обувью​.',
     type: 'fail',
-    comment: 'Если ты потерялся - надо ждать на месте. Так тебя проще найти!'
+    comment: 'Где бы ты ни потерялся - помни «Правило трех О»​: \r\n - Остановись\r\n - Оглянись\r\n - Окликни\r\nНе уходи далеко с места, так тебя будет проще найти!'
 });
 novel.dialogs.push(dialog);
 
@@ -97,43 +97,55 @@ novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = '«Молодой человек, нужна помощь? Пойдем поищем твоих родителей.»​';
+dialog.question = '«Добрый день. Вам нужна помощь?»​';
 dialog.type = 'character';
 dialog.characterImg = 'worker';
 dialog.answers.push({
-    text: 'Можно позвонить маме с вашего телефона? Ее номер - +79.......​',
-    nextDialog: 5
+    text: 'Застесняться и убежать',
+    type: 'fail',
+    comment: 'Смелее! Сделай объявление по громкой связи!'
 });
 dialog.answers.push({
-    text: 'Пойдемте!',
-    type: 'fail',
-    comment: 'Если ты потерялся - надо ждать на месте. А если есть возможность - позвони маме и скажи, где ты.'
+    text: '«Меня зовут %name%, помогите мне найти маму. Можно сделать объявление?»',
+    nextDialog: 6
 });
+
 novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = '«Молодой человек, нужна помощь? Пойдем поищем твоих родителей.»​';
+dialog.question = 'На твой зов подходит незнакомая женщина с ребенком и спрашивает:\r\n«Что такое? Ты потерялся? Пойдем поищем твоих родителей»​.';
 dialog.type = 'character';
 dialog.characterImg = 'woman';
 dialog.answers.push({
-    text: 'Можно позвонить маме с вашего телефона? Ее номер - +79.......​',
+    text: 'Нет, можно я лучше позвоню маме с вашего телефона? Ее номер - +79.......​',
     nextDialog: 5
 });
 dialog.answers.push({
     text: 'Пойдемте!',
     type: 'fail',
-    comment: 'Если ты потерялся - надо ждать на месте. А если есть возможность - позвони маме и скажи, где ты.'
+    comment: 'Где бы ты ни потерялся - помни «Правило трех О»​:\r\n - Остановись\r\n - Оглянись\r\n - Окликни\r\nНе уходи далеко с места, так тебя будет проще найти!'
 });
 novel.dialogs.push(dialog);
 
 dialog = {};
 dialog.answers = [];
-dialog.question = 'Ты дозвонился до мамы.\n«Ты где? Я тебя потеряла!»​';
+dialog.question = 'Ты дозвонился до мамы.\r\n«Ты где? Я тебя потеряла!»​';
 dialog.type = 'character';
 dialog.characterImg = 'mother';
 dialog.answers.push({
-    text: '«Я около магазина "Динозавры для дома", около большого динозавра.»​',
+    text: '«Я около магазина “Динозавры для дома”, около большого динозавра.»​',
+    type: 'win'
+});
+novel.dialogs.push(dialog);
+
+dialog = {};
+dialog.answers = [];
+dialog.question = 'Работник торгового центра говорит в микрофон, и ты сразу слышишь его голос из всех динамиков:\r\n«Внимание, внимание! Родители ребенка по имени %name%, просим вас срочно подойти к магазину “Динозавры для дома”! Повторяю...»​';
+dialog.type = 'character';
+dialog.characterImg = 'worker';
+dialog.answers.push({
+    text: 'Вот и здорово! Осталось только дождаться маму на условленном месте!',
     type: 'win'
 });
 novel.dialogs.push(dialog);
@@ -216,7 +228,7 @@ dialog.answers.push({
     comment: 'Мама будет тебя искать на ближайшей остановке. Если ты уедешь дальше, она проищет тебя целый день!'
 });
 dialog.answers.push({
-    text: 'Попросить водителя открыть на следующей остановке.',
+    text: 'Попросить водителя открыть на следующей остановке и выйти.',
     nextDialog: 1
 });
 novel.dialogs.push(dialog);
@@ -396,7 +408,7 @@ dialog.answers.push({
     comment: 'Никому не открывай, когда ты дома один! Злоумышленник может притвориться твоим родственником, как в сказке про волка и козлят.'
 });
 dialog.answers.push({
-    text: 'Назови пароль!',
+    text: '«Назови пароль!»',
     nextDialog: 5
 });
 novel.dialogs.push(dialog);
@@ -432,7 +444,7 @@ dialog.answers.push({
     comment: 'Никому не открывай, когда ты дома один! Злоумышленник может притвориться твоим родственником, как в сказке про волка и козлят.'
 });
 dialog.answers.push({
-    text: 'Назови пароль!',
+    text: '«Назови пароль!»',
     nextDialog: 8
 });
 novel.dialogs.push(dialog);
@@ -448,7 +460,7 @@ dialog.answers.push({
     comment: 'Никому не открывай, когда ты дома один! Злоумышленник может притвориться твоим родственником, как в сказке про волка и козлят.'
 });
 dialog.answers.push({
-    text: 'Назови пароль!',
+    text: '«Назови пароль!»',
     nextDialog: 9
 });
 novel.dialogs.push(dialog);
@@ -568,7 +580,7 @@ dialog.answers = [];
 dialog.question = 'Мужчина теряется и убегает.';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Старый прием, дядя.',
+    text: 'Это обычная уловка похитителей детей! Позвоню родителям и расскажу про этот случай.',
     type: 'win'
 });
 novel.dialogs.push(dialog);
@@ -586,7 +598,7 @@ dialog.characterImg = 'stranger2';
 dialog.answers.push({
     text: '«Да, хочу!»',
     type: 'fail',
-    comment: 'Избегай незнакомых людей. Громко скажи "Я тебя не знаю!" или "Пожар", чтобы прилечь внимание и испугать преступника.'
+    comment: 'Избегай незнакомых людей. Громко скажи "Я тебя не знаю!" или "Пожар", чтобы привлечь внимание и испугать преступника.'
 });
 dialog.answers.push({
     text: 'Кричать «Я тебя не знаю!»',

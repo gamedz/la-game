@@ -58,13 +58,13 @@ const SceneIntro = new Phaser.Class({
         //     })
         //     .setOrigin(0.5);
 
-        element = this.add.dom(this.cameras.main.centerX, 900).createFromCache('nameform');
+        inputForm = this.add.dom(this.cameras.main.centerX, 900).createFromCache('nameform');
 
         btnStartGame = this.add.image(this.cameras.main.centerX, 900, 'btnStartGame')
             .setInteractive()
             .on('pointerdown', function() {
 
-                inputText = element.getChildByName('nameField');
+                inputText = inputForm.getChildByName('nameField');
 
                 playerName = inputText.value;
 
@@ -76,25 +76,28 @@ const SceneIntro = new Phaser.Class({
 
             }, this);
 
-        this.tweens.add({
-            targets: [element],
-            y: 420,
-            duration: 1000,
-            ease: 'Power3'
-        });
-
-        this.tweens.add({
-            targets: [btnStartGame],
-            y: 490,
-            duration: 1000,
-            ease: 'Power3'
-        });
+        currentScene = this;
 
         this.tweens.add({
             targets: [hello],
             y: 217,
-            duration: 1000,
-            ease: 'Power3'
+            duration: 1500,
+            ease: 'Quad.easeOut',
+            onComplete: function() {
+                currentScene.tweens.add({
+                    targets: [inputForm],
+                    y: 420,
+                    duration: 750,
+                    ease: 'Quad.easeOut'
+                });
+        
+                currentScene.tweens.add({
+                    targets: [btnStartGame],
+                    y: 490,
+                    duration: 750,
+                    ease: 'Quad.easeOut'
+                });
+            }
         });
 
         this.add.text(20, 742, 'Над игрой работали: Игнат Глушихин, Ольга Дизастр Волкова', {

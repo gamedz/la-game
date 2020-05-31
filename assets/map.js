@@ -202,6 +202,15 @@ const SceneMap = new Phaser.Class({
         }, this);
 
 
+        if (passedPuzzlesNumber >= 1)
+            this.add.image(316, 318, 'puzzle');
+        if (passedStrangersNumber >= 1)
+            this.add.image(734, 151, 'stranger1').setOrigin(0.5, 1).setScale(0.65);
+        if (passedStrangersNumber >= 2)
+            this.add.image(761, 262, 'stranger2').setOrigin(0.5, 1).setScale(0.65);
+        if (passedStrangersNumber >= 3)
+            this.add.image(500, 580, 'stranger3').setOrigin(0.5, 1).setScale(0.65);
+
         hero = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'hero');
         hero.setOrigin(0, 1);
 
@@ -265,17 +274,6 @@ const SceneMap = new Phaser.Class({
         bird.pos = new Phaser.Math.Vector2();
         bird.tangent = new Phaser.Math.Vector2();
         currentScene.letBirdFly(bird);
-
-        if (passedPuzzlesNumber >= 1)
-            this.add.image(316, 318, 'puzzle');
-        if (passedStrangersNumber >= 1)
-            this.add.image(734, 151, 'stranger1').setOrigin(0.5, 1).setScale(0.65);
-        if (passedStrangersNumber >= 2)
-            this.add.image(761, 262, 'stranger2').setOrigin(0.5, 1).setScale(0.65);
-        if (passedStrangersNumber >= 3)
-            this.add.image(500, 580, 'stranger3').setOrigin(0.5, 1).setScale(0.65);
-
-
 
     },
     letBirdFly: function(bird) {

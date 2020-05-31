@@ -25,6 +25,7 @@ const SceneNovel = new Phaser.Class({
         dialog = novel.dialogs[data.dialogIndex];
         locationName = novel.locationName;
         question = dialog.question;
+        question = question.replace('%name%', playerName);
         answers = dialog.answers;
     },
 

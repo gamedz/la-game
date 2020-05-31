@@ -111,8 +111,7 @@ const SceneFail = new Phaser.Class({
                 color: 'black',
                 fontSize: '40px',
                 wordWrap: {
-                    width: 350,
-                    useAdvancedWrap: true
+                    width: 350
                 }
             });
             txtComment.setOrigin(0.5);
