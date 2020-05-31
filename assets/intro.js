@@ -29,25 +29,26 @@ const SceneIntro = new Phaser.Class({
         });
 
         this.load.image('introBack', 'assets/intro/back.png');
+        this.load.image('hello', 'assets/intro/hello.png');
         this.load.image('btnStartGame', 'assets/btnStartGame.png');
         this.load.html('nameform', 'assets/nameform.html');
     },
 
     create: function() {
         this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'introBack')
+            .setInteractive();
+
+        hello = this.add.image(this.cameras.main.centerX, -100, 'hello')
             .setInteractive()
-            .on('pointerdown', function() {
-                console.log(game.input.mousePointer.x + '   ' + game.input.mousePointer.y);
-
-            }, this);
-
-        const txtHello = this.add.text(this.cameras.main.centerX, 120, 'Привет!', {
-                fontFamily: "rotondac",
-                color: '#2794D1',
-                fontSize: '35px',
-                alpha: 0,
-            })
             .setOrigin(0.5);
+
+        // const txtHello = this.add.text(this.cameras.main.centerX, 120, 'Привет!', {
+        //         fontFamily: "rotondac",
+        //         color: '#2794D1',
+        //         fontSize: '35px',
+        //         alpha: 0,
+        //     })
+        //     .setOrigin(0.5);
 
         // txtWhatIsYourName = this.add.text(this.cameras.main.centerX, -100, 'Как тебя зовут?', {
         //         fontFamily: "rotondac",
@@ -89,6 +90,12 @@ const SceneIntro = new Phaser.Class({
             ease: 'Power3'
         });
 
+        this.tweens.add({
+            targets: [hello],
+            y: 217,
+            duration: 1000,
+            ease: 'Power3'
+        });
 
         this.add.text(20, 742, 'Над игрой работали: Игнат Глушихин, Ольга Дизастр Волкова', {
             fontFamily: "rotondac",

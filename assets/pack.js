@@ -81,6 +81,18 @@ const ScenePack = new Phaser.Class({
             name: 'pack',
             title: 'Рюкзак',
             isGood: true
+        }, {
+            name: 'gun',
+            title: 'Игрушечный пистолет',
+            isGood: false
+        }, {
+            name: 'dumbbell',
+            title: 'Гантели',
+            isGood: false
+        }, {
+            name: 'fox',
+            title: 'Игрушечная лиса',
+            isGood: false
         }];
 
         items.forEach(function(item, i) {
