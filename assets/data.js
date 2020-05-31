@@ -366,7 +366,7 @@ dialog.answers = [];
 dialog.question = 'Снова звонок.';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Кто там?',
+    text: '«Кто там?»',
     nextDialog: 2
 });
 novel.dialogs.push(dialog);
@@ -392,7 +392,7 @@ dialog.answers = [];
 dialog.question = 'Проходит время. Снова раздается звонок.';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Кто там?',
+    text: '«Кто там?»',
     nextDialog: 4
 });
 novel.dialogs.push(dialog);
@@ -428,7 +428,7 @@ dialog.answers = [];
 dialog.question = 'Опять раздается звонок в дверь.';
 dialog.type = 'simple';
 dialog.answers.push({
-    text: 'Кто там?',
+    text: '«Кто там?»',
     nextDialog: 7
 });
 novel.dialogs.push(dialog);
@@ -501,7 +501,7 @@ dialog.answers.push({
     comment: 'Никому не открывай, когда ты дома один! Вдруг это не полицейский, а грабитель?'
 });
 dialog.answers.push({
-    text: 'Взрослых нет дома, я не буду открывать.',
+    text: '«Взрослых нет дома, я не буду открывать».',
     type: 'win'
 });
 novel.dialogs.push(dialog);
