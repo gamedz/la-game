@@ -15,11 +15,11 @@ const ScenePack = new Phaser.Class({
 
     preload: function() {
         var gfxProgress = this.add.graphics();
-        var txtProgress = this.add.text( 50, 334, 'Загрузка...', {
-                fontFamily: "rotondac",
-                color: '#ffffff',
-                fontSize: '35px'
-            });
+        var txtProgress = this.add.text(50, 334, 'Загрузка...', {
+            fontFamily: "rotondac",
+            color: '#ffffff',
+            fontSize: '35px'
+        });
         this.load.on('progress', function(value) {
 
             gfxProgress.clear();
@@ -30,7 +30,7 @@ const ScenePack = new Phaser.Class({
             txtProgress.destroy();
             gfxProgress.destroy();
         });
-        
+
         previousNovelType = 'simple';
         this.load.image('forest', 'assets/forest.png');
         items = [{
@@ -122,17 +122,17 @@ const ScenePack = new Phaser.Class({
                 fontFamily: "rotondac",
                 color: 'white',
                 fontSize: '30px',
-            wordWrap: {
-                width: 900,
-                useAdvancedWrap: true
-            }
+                wordWrap: {
+                    width: 900,
+                    useAdvancedWrap: true
+                }
             })
             .setOrigin(0.5)
             .setStroke('black', 2);
 
         items.forEach(function(item, i) {
             item.isCorrectPlace = false;
-            this.add.image(50 + Math.random()*924, 700, item.name)
+            this.add.image(50 + Math.random() * 924, 700, item.name)
                 .setInteractive({
                     draggable: true
                 })

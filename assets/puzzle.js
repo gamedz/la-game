@@ -15,11 +15,11 @@ const ScenePuzzle = new Phaser.Class({
 
     preload: function() {
         var gfxProgress = this.add.graphics();
-        var txtProgress = this.add.text( 50, 334, 'Загрузка...', {
-                fontFamily: "rotondac",
-                color: '#ffffff',
-                fontSize: '35px'
-            });
+        var txtProgress = this.add.text(50, 334, 'Загрузка...', {
+            fontFamily: "rotondac",
+            color: '#ffffff',
+            fontSize: '35px'
+        });
         this.load.on('progress', function(value) {
 
             gfxProgress.clear();
@@ -38,6 +38,7 @@ const ScenePuzzle = new Phaser.Class({
         this.load.image('puzzleBack', 'assets/puzzle/puzzleBack.png');
         this.load.image('completed' + '_' + passedPuzzlesNumber, 'assets/puzzle/' + passedPuzzlesNumber + '/completed.png');
         this.load.image('btnGo', 'assets/btnGo.png');
+        this.load.image('check', 'assets/check.png');
 
     },
 
@@ -145,6 +146,32 @@ const ScenePuzzle = new Phaser.Class({
         this.input.on('dragend', function(pointer, gameObject) {
 
             if (suitablePos.distance(currentPos) < 30) {
+
+                check = currentScene.add.image(suitablePos.x, suitablePos.y, 'check')
+                    .setScale(0);
+
+                currentScene.tweens.add({
+                    targets: check,
+                    scale: {
+                        from: 0,
+                        to: 1.5
+                    },
+                    ease: 'Bounce.easeOut',
+                    duration: 500,
+                    yoyo: false,
+                    onComplete: function() {
+                        currentScene.tweens.add({
+                            targets: check,
+                            alpha: {
+                                from: 1,
+                                to: 0
+                            },
+                            ease: 'linear',
+                            duration: 1500,
+                            yoyo: false
+                        });
+                    }
+                });
 
                 gameObject.data.get('owner').placed = true;
                 gameObject.disableInteractive();

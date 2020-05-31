@@ -12,11 +12,11 @@ const SceneIntro = new Phaser.Class({
 
     preload: function() {
         var gfxProgress = this.add.graphics();
-        var txtProgress = this.add.text( 50, 334, 'Загрузка...', {
-                fontFamily: "rotondac",
-                color: '#ffffff',
-                fontSize: '35px'
-            });
+        var txtProgress = this.add.text(50, 334, 'Загрузка...', {
+            fontFamily: "rotondac",
+            color: '#ffffff',
+            fontSize: '35px'
+        });
         this.load.on('progress', function(value) {
 
             gfxProgress.clear();
@@ -35,11 +35,11 @@ const SceneIntro = new Phaser.Class({
 
     create: function() {
         this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'introBack')
-        .setInteractive()
-        .on('pointerdown', function() {
-            console.log(game.input.mousePointer.x + '   ' + game.input.mousePointer.y);
+            .setInteractive()
+            .on('pointerdown', function() {
+                console.log(game.input.mousePointer.x + '   ' + game.input.mousePointer.y);
 
-        }, this );
+            }, this);
 
         const txtHello = this.add.text(this.cameras.main.centerX, 120, 'Привет!', {
                 fontFamily: "rotondac",
@@ -67,13 +67,12 @@ const SceneIntro = new Phaser.Class({
 
                 playerName = inputText.value;
 
-                if ( playerName != '' )
-                {
+                if (playerName != '') {
                     this.scene.start('sceneMap', {
                         isRaising: true
                     });
                 }
-                
+
             }, this);
 
         this.tweens.add({
@@ -88,14 +87,14 @@ const SceneIntro = new Phaser.Class({
             y: 490,
             duration: 1000,
             ease: 'Power3'
-        });        
-    
+        });
 
-                this.add.text(20, 742, 'Над игрой работали: Игнат Глушихин, Ольга Дизастр Волкова', {
-                fontFamily: "rotondac",
-                color: 'white',
-                fontSize: '20px'
-            }); 
+
+        this.add.text(20, 742, 'Над игрой работали: Игнат Глушихин, Ольга Дизастр Волкова', {
+            fontFamily: "rotondac",
+            color: 'white',
+            fontSize: '20px'
+        });
     }
 });
 
@@ -104,10 +103,10 @@ const config = {
     parent: 'phaser-example',
     width: 1024,
     height: 768,
-      scale: {
-         mode: Phaser.Scale.FIT,
-          autoCenter: Phaser.Scale.CENTER_BOTH         
-      },    
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
     dom: {
         createContainer: true
     },
