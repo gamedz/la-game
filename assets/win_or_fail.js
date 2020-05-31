@@ -94,7 +94,6 @@ const SceneFail = new Phaser.Class({
         });
         
         this.load.image('lose', 'assets/lose.png');
-        this.load.image('lose_why', 'assets/lose_why.png');
     },
 
     create: function() {
@@ -106,10 +105,8 @@ const SceneFail = new Phaser.Class({
                     type: previousNovelType
                 });
             }, this);
-
-        if (this.comment != '') {
-            lose_why = this.add.image(724, 310, 'lose_why');
-            txtComment = this.add.text(724, 310, this.comment, {
+        
+            txtComment = this.add.text(771, 344, this.comment, {
                 fontFamily: "rotondac",
                 color: 'black',
                 fontSize: '40px',
@@ -121,7 +118,7 @@ const SceneFail = new Phaser.Class({
             txtComment.setOrigin(0.5);
 
             this.tweens.add({
-                targets: [lose_why, txtComment],
+                targets: txtComment,
                 alpha: {
                     from: 0,
                     to: 1
@@ -129,8 +126,7 @@ const SceneFail = new Phaser.Class({
                 duration: 500,
                 ease: 'Quad.easeOut'
             });
-            txtComment.setAlpha(0);
-        }
+            txtComment.setAlpha(0);        
 
     }
 });

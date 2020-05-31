@@ -49,49 +49,47 @@ const SceneIntro = new Phaser.Class({
             })
             .setOrigin(0.5);
 
-        txtWhatIsYourName = this.add.text(this.cameras.main.centerX, -100, 'Как тебя зовут?', {
-                fontFamily: "rotondac",
-                color: '#2794D1',
-                fontSize: '35px',
-                alpha: 0,
-            })
-            .setOrigin(0.5);
+        // txtWhatIsYourName = this.add.text(this.cameras.main.centerX, -100, 'Как тебя зовут?', {
+        //         fontFamily: "rotondac",
+        //         color: '#2794D1',
+        //         fontSize: '35px',
+        //         alpha: 0,
+        //     })
+        //     .setOrigin(0.5);
 
-        element = this.add.dom(this.cameras.main.centerX - 100, -100).createFromCache('nameform');
+        element = this.add.dom(this.cameras.main.centerX, 900).createFromCache('nameform');
 
-        btnStartGame = this.add.image(this.cameras.main.centerX + 200, -100, 'btnStartGame')
+        btnStartGame = this.add.image(this.cameras.main.centerX, 900, 'btnStartGame')
             .setInteractive()
             .on('pointerdown', function() {
+
                 inputText = element.getChildByName('nameField');
 
                 playerName = inputText.value;
 
-                if ( playerName == '' )
-                {
-                    txtWhatIsYourName.setText( 'Как тебя зовут? Напиши, пожалуйста, свое имя и фамилию:' );
-                }
-                else
+                if ( playerName != '' )
                 {
                     this.scene.start('sceneMap', {
                         isRaising: true
                     });
                 }
-
                 
             }, this);
 
         this.tweens.add({
-            targets: [element, btnStartGame],
-            y: 430,
+            targets: [element],
+            y: 420,
             duration: 1000,
             ease: 'Power3'
         });
+
         this.tweens.add({
-            targets: txtWhatIsYourName,
-            y: 370,
+            targets: [btnStartGame],
+            y: 490,
             duration: 1000,
             ease: 'Power3'
         });        
+    
 
                 this.add.text(20, 742, 'Над игрой работали: Игнат Глушихин, Ольга Дизастр Волкова', {
                 fontFamily: "rotondac",

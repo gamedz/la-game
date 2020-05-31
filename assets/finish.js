@@ -32,6 +32,7 @@ const SceneFinish = new Phaser.Class({
         });
         
         this.load.image('diplom', 'assets/diplom.png');
+        this.load.image('btnDownload', 'assets/btnDownload.png');
     },
 
     create: function() {
@@ -44,5 +45,39 @@ const SceneFinish = new Phaser.Class({
             alpha: 1
         });
         txtName.setOrigin(0.5);
+
+        btnDownload = this.add.image(this.cameras.main.centerX, 868, 'btnDownload')
+            .setOrigin(0.5)
+            .setInteractive()
+            .on('pointerdown', function() {
+                btnDownload.setVisible(false);
+                game.renderer.snapshot(function (image) {                
+                var canvasElement = document.getElementById(game.canvas);
+                var MIME_TYPE = "image/png";
+                var imgURL = image.src;
+                var dlLink = document.createElement('a');
+                dlLink.download = playerName + ' Диплом';
+                dlLink.href = imgURL;
+                dlLink.dataset.downloadurl = [MIME_TYPE, dlLink.download, dlLink.href].join(':');
+                document.body.appendChild(dlLink);
+                dlLink.click();
+                document.body.removeChild(dlLink);
+                btnDownload.setVisible(true);
+            });
+            }, this);
+
+        this.tweens.add({
+            targets: btnDownload,
+            y: {
+                from: 868,
+                to: 695
+            },
+            duration: 500,
+            ease: 'Quad.easeInOut'
+        });
+
+        
+
+
     }
 });

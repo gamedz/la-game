@@ -50,18 +50,6 @@ const ScenePack = new Phaser.Class({
             title: 'Наушники',
             isGood: false
         }, {
-            name: 'matches',
-            title: 'Спички',
-            isGood: true
-        }, {
-            name: 'medkit',
-            title: 'Аптечка',
-            isGood: true
-        }, {
-            name: 'paper_map',
-            title: 'Бумажная карта',
-            isGood: true
-        }, {
             name: 'raincoat',
             title: 'Дождевик',
             isGood: true
@@ -80,6 +68,18 @@ const ScenePack = new Phaser.Class({
         }, {
             name: 'whistle',
             title: 'Свисток',
+            isGood: true
+        }, {
+            name: 'jacket',
+            title: 'Камуфляж',
+            isGood: false
+        }, {
+            name: 'snack',
+            title: 'Шоколадка',
+            isGood: true
+        }, {
+            name: 'pack',
+            title: 'Рюкзак',
             isGood: true
         }];
 

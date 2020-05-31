@@ -236,6 +236,20 @@ const SceneMap = new Phaser.Class({
 
             }, this);
 
+
+        this.add.text(1020, 750, ' ', {
+                color: 'white',
+                fontSize: '10px'
+            })
+            .setInteractive()
+            .on('pointerdown', function() {
+
+                this.scene.start('sceneFinish');
+
+            }, this);
+
+
+
         bird = this.add.sprite(0, this.cameras.main.centerY, 'bird');
 
         this.anims.create({
